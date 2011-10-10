@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>HTML5 mushroom and bear</title>
+
+        <script type="text/javascript" src="js/jquery-1.6.min.js" charset="utf-8"></script>
+        <script type="text/javascript" src="js/app.js" charset="utf-8"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8">
+            //<![CDATA[
+
+            //Variables to handle game parameters
+        var gameloopId;
+        var speed=3;
+        var horizontalSpeed = speed;
+        var verticalSpeed = -speed;  //Start heading up (to give player a change to get the mouse in position)
+        var screenWidth;
+        var screenHeight
+        var gameRunning = false;
+        var ctx;
+        var showBounds = false;
+        var frameCount = 0;
+        var frameCountId;
+        var score=0;
+
+
+        //Create images
+        var mushroomImg = new Image();
+        var mushroomWobbleImg = new Image();
+        var backgroundForestImg = new Image();
+        var bearEyesOpenImg = new Image();
+        var bearEyesClosedImg = new Image();
+        var flowerImg = new Image();
+        var leafImg = new Image();
+        var acornImg = new Image();
+        var scoreImg = new Image();
+        var bonusImg = new Image();
+        var owl1 = new Image();
+        var owl2 = new Image();
+        var multiPoint = 0;
+        var currentBonusImage = 0;
+        var delayCount=0;
+        //var showBonus = false;
+        var bonusStarted;
+        var bonusActive = false;
+
+
+        //Baddy
+        var BADDY_OFF = 0;
+        var BADDY_FLYING = 1;
+        var BADDY_HIT = 3;
+        var baddyX = 480;
+        var baddyStatus = BADDY_OFF;
+        var currentBaddyImage = 0;
+        var baddyImages = new Array();
+
+        //Lives Object
+        var livesImages = new Array();
+
+        //bonus images
+        var bonusImages = new Array();
+
+
+        var soundType = "wav";
+        //change sounds type based on browser (i.e. chrome)
+        if(navigator.userAgent.toLowerCase().indexOf('chrome') > -1) { soundType = "mp3"; }
+
+        //Create and load sounds 
+        var boing1 = new Audio("./sounds/boing_1." + soundType);
+        var boing2 = new Audio("./sounds/boing_2." + soundType);
+        var boing3 = new Audio("./sounds/boing_3." + soundType);
+        var boing4 = new Audio("./sounds/boing_4." + soundType);
+        var boing5 = new Audio("./sounds/boing_5." + soundType);
+        var awwwww = new Audio("./sounds/crowdgroan." + soundType);
+        var collisionPrize = new Audio("./sounds/collisionPrize." + soundType);
+        var collisionStarPrize = new Audio("./sounds/collisionStarPrize." + soundType);
+        var groan = new Audio("./sounds/groan." + soundType);
+        var newLevel = new Audio("./sounds/newLevel." + soundType);
+        var owl = new Audio("./sounds/owl." + soundType);
+        var squawk = new Audio("./sounds/squawk." + soundType);
+
+        //set background sound of birds, loop and reduce volume
+        var birds = new Audio("./sounds/birds." + soundType);
+        birds.loop = true;
+        birds.volume = 0.1;
+
+        var mushroom = new Mushroom();
+        var animal = new Animal();
+        var baddy = new Baddy();
+
+        baddy.y = 125;
+        baddy.x = 480;
+
+        //Wait for DOM to load and init game
+        $(window).ready(function(){ init(); });
+
+        //]]>
+    </script>
+</head>
+<body>
+    <div id="container" style="border:1px solid; width:480px; height:320px;">
+
+        <canvas id="canvas" width="480" height="320">
+        Oh dear, your browser dosen't support HTML5! Tell you what, why don't you upgrade to a decent browser - you won't regret it!
+        </canvas>
+
+    </div>
+    <img id="BtnImgStart" style="position: absolute; left: 200px; top: 200px; cursor: pointer; float: left;" src="images/START-Button.png">
+
+    <div style="clear:left;" id="fps">0 fps</div>
+    <input id="showHideBounds" value="show/hide bounds" type="button">
+</body>
+</html>
