@@ -1,0 +1,145 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无法找到该页 - HTML5中文网[www.html5China.com]</title>
+<style>
+* {
+	padding:0;
+	margin:0;
+	border:0
+}
+a {
+	text-decoration:none;
+}
+body {
+	font-family:"微软雅黑", "宋体";
+	font-size:14px;
+	color:#838383;
+	background:#fff;
+}
+dl {
+	width:512px;
+	margin:0 auto;
+	margin-top:100px;
+}
+dl dt {
+	width:512px; 
+	background:url(/templets/html5china/images/errbg.gif) 0 0 repeat-x;
+}
+dl dd {
+	width:470px;
+	height:188px;
+	border-left:1px solid #dbdada;
+	border-right:1px solid #dbdada;
+	border-bottom:1px solid #dbdada;
+	background:#fff;
+	padding-top:40px;
+	padding-left:40px;
+	position:relative;
+}
+.cyr {
+	font-size:11px;
+	font-family:Verdana, Geneva, sans-serif;
+	margin:0 auto; 
+	padding-left:115px;
+	position:absolute;
+	bottom:5px;
+	left:47px; 
+}
+.cyr a {
+	font-size:11px;
+	font-weight:bold;
+	color:#0089af;
+}
+.desc {
+	width:360px;
+	height:85px;
+	float:left;
+	margin-left:30px;  
+}
+.desc p {
+	margin-bottom:30px;
+}
+.smile {
+	float:left;
+	padding-top:3px;
+}
+h1 {
+	color:#101010;
+	font-size:18px;
+	line-height:30px;
+}
+.cls {
+	clear:both;
+	height:1px;
+	width:1px;
+	line-height:1px;
+	}
+.back {
+	padding-left:78px;
+	color:#0089af; 
+	}
+.back a:hover, .back a:hover, .back a:visited, .back a:link{ 
+	color:#0089af;
+	}
+</style>
+<script language=javascript>
+setTimeout("window.location.href='index.html'",5000)
+
+ function Counter(nMax,nInterval)
+{
+this.maxTime=nMax;
+this.interval=nInterval;
+this.objId="timer";
+this.obj=null;
+this.num=this.maxTime;
+this.timer=null;
+this.start=function()
+{ 
+this.obj=document.getElementById(this.objId);
+if(this.num>0) setTimeout(this.run,this.interval*1000);
+};
+this.run=function()
+{
+if(myCounter.num>0) 
+{
+myCounter.num--;
+myCounter.obj.innerHTML=myCounter.num;
+myCounter.timer=setTimeout(myCounter.run,myCounter.interval*1000);
+}
+else clearTimeout(myCounter.timer);
+};
+this.show=function()
+{
+document.write("<span id="+this.objId+">"+this.num+"</span>");
+this.obj=document.getElementById(this.objId);
+//alert(this.obj.innerHTML);
+}
+}
+</script>
+</head>
+
+<body onload="myCounter.start();">
+<script language="JavaScript" type="text/JavaScript">
+var myCounter=new Counter(5,1);
+</script>
+<dl>
+  <dt><img src="/templets/html5china/images/errlogo.gif" width="512" height="92" alt="HTML5中文网" /></dt>
+<dd><img src="/templets/html5china/images/err_07.gif" width="50" height="65" class="smile" />
+    <div class="desc">
+      <h1>很抱歉无法找到该页</h1>
+      <p class="desc1">您正在搜索的页面可能已经删除、更名或暂时不可用。</p> 
+    </div>
+    <div class="cls"></div>
+    <div class="back">
+    <script language="JavaScript" type="text/JavaScript">
+myCounter.show();
+</script>秒后自动返回首页 &nbsp;&nbsp;|&nbsp;&nbsp; <a href="/index.html">返回首页</a>&nbsp;&nbsp;|&nbsp;&nbsp; <a href="/bbs">进入论坛</a></div>
+    <div class="cyr">Copyright © 2002-2009 <a href="http://www.html5China.com" target="_parent">HTML5中文网</a></div>
+  </dd>
+</dl> 
+<div style="display:none;"><script src="http://s11.cnzz.com/stat.php?id=2212046&web_id=2212046" language="JavaScript"></script></div>
+</body>
+</html>

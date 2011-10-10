@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Feedsky</title>
+<style type="text/css">
+<!--
+body {
+	background-color: #FFFFFF;
+	padding:0;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+}
+-->
+</style></head>
+
+<body>
+<script language="JavaScript" type="text/javascript" src="msub_ajax_data/prototype.js"></script>
+<script language="JavaScript">
+/*--------------------------------------------------------------------------*/
+
+function downloadUrl(url, callback, data)
+{
+    // init
+    url += url.indexOf("?") > 0 ? "&" : "?";
+    url += "random_download_url=" + Math.random();
+
+    if (typeof data == 'undefined')
+    {
+        var data = null;
+    }
+
+    method = data ? 'POST' : 'GET';
+
+    // create XMLHttpRequest object
+    if (window.XMLHttpRequest)
+    {
+        var objXMLHttpRequest = new XMLHttpRequest();
+    }
+    else
+    {
+        var MSXML = ['MSXML2.XMLHTTP.6.0', 'MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP.5.0', 'MSXML2.XMLHTTP.4.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'];
+        for(var n = 0; n < MSXML.length; n ++)
+        {
+            try
+            {
+                var objXMLHttpRequest = new ActiveXObject(MSXML[n]);
+                break;
+            }
+            catch(e)
+            {
+            }
+        }
+    }
+
+    // send request
+    with(objXMLHttpRequest)
+    {
+        //setTimeouts(30*1000,30*1000,30*1000,30*60*1000);
+        try
+        {
+            open(method, url, true);
+
+            if (method == 'POST')
+            {
+                setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+            }
+
+            send(data);
+        }
+        catch(e)
+        {
+            alert(e);
+        }
+
+        // on ready
+        onreadystatechange = function()
+        {
+            if (objXMLHttpRequest.readyState == 4)
+            {
+                callback(objXMLHttpRequest.responseText, objXMLHttpRequest.status);
+                delete(objXMLHttpRequest);
+            }
+        }
+    }
+}  
+
+
+var imageCode = '';
+var emailAddress = '';
+var burl = "mhtml5";
+function PostEmailAddress()
+{
+	var email = $('email').value;
+	var filter  = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	if (!email || !filter.test(email))
+	{
+		ShowMessage("Email地址错误");
+		$('email').select();
+		return false;
+	}
+
+	emailAddress = email;
+
+	ShowLoading();
+	downloadUrl("/msub_ajax_sub.html?setp=1&burl="+burl+"&email="+email,CallbackPostEmail);
+	//new Ajax.Request("/msub_ajax_sub.html",{method:['get'],onComplete:CallbackPostEmail,parameters:"setp=1&burl="+burl+"&email="+email});
+}
+
+function PostValidCode()
+{
+	var code = $('valid').value;
+
+	ShowLoading();
+	downloadUrl("/msub_ajax_sub.html?setp=2&burl="+burl+"&email="+emailAddress+"&valid="+code+"&s="+imageCode,CallbackPostValid);
+	//new Ajax.Request("/msub_ajax_sub.html",{method:['get'],onComplete:CallbackPostValid,parameters:"setp=2&burl="+burl+"&email="+emailAddress+"&valid="+code+"&s="+imageCode});
+}
+
+function CallbackPostEmail(transport,code)
+{
+	var res = transport;
+
+	ShowStep1();
+	if (res=='error(1)')
+	{
+		ShowMessage("烧制地址错误");
+		ShowMessage("你已经订阅过了");
+	}
+	else if (res=='error(2)')
+	{
+		ShowMessage("Feed订阅已关闭");
+	}
+	else if (res=='error(3)')
+	{
+		ShowMessage("你已经订阅过了");
+	}
+	else if (res=='error(4)')
+	{
+		ShowMessage("Email地址错误");
+	}
+	else if (res.substr(0,2)=='ok')
+	{
+		imageCode = res.replace('ok', '');
+		if (imageCode)
+		{
+			ShowMessage("");
+			ShowStep2();
+		}
+		else
+		{
+			ShowMessage("发生错误,请重试");
+		}
+	}
+	else
+	{
+		ShowMessage("发生错误,请重试");
+	}
+}
+
+function CallbackPostValid(transport,code)
+{
+	var res = transport;
+	
+	ShowStep1();
+	if (res=='error(1)')
+	{
+		ShowMessage("烧制地址错误");
+		ShowMessage("你已经订阅过了");
+	}
+	else if (res=='error(2)')
+	{
+		ShowMessage("Feed订阅已关闭");
+	}
+	else if (res=='error(3)')
+	{
+		ShowMessage("你已经订阅过了");
+	}
+	else if (res=='error(4)')
+	{
+		ShowMessage("Email地址错误");
+	}
+	else if (res=='error(5)')
+	{
+		ShowStep2();
+		ShowMessage("验证码错误");
+	}
+	else if (res=='ok')
+	{
+		$('message').innerHTML = "";
+		var html = '';
+		html += '<p style="margin:0;"><span style="font-size:12px; color:#FFAC00;font-weight: bold;">申请成功</span><br/><span style="font-size:12px; color:#000;">请到订阅邮箱完成最后一步确认</span><br />';
+		// 2010 02 03 lgz 去除继续操作的提示
+		//html += '<span style="font-size:10px; font-family:Arial; color:#999;" ><a href="###" style="text-decoration:none" onclick="ShowStep1();">单击此处继续操作</a></span></p>';
+		$('mail_sub_main').innerHTML = html;
+	}
+}
+
+function ShowMessage(msg)
+{
+	$('message').innerHTML = msg + "<br />";
+}
+
+function ShowLoading()
+{
+	ShowMessage("");
+	$('mail_sub_main').innerHTML = '<span style="font-size:12px; color:#333333;"><img src="/images/loading_3.gif" align="absmiddle"> 处理中......</span>';
+}
+
+function ShowStep1()
+{
+	var html = '';
+	html += '<input name="email" type="text" value="请输入邮件地址" size="14" onfocus="this.select();this.style.color=\'#000\';" id="email" onblur="check(this.value,1);" style="color:#666;" />';
+	html += '<br />';
+	html += '<input type="submit" name="Submit" value="订阅" onclick="PostEmailAddress();" />';
+
+	$('mail_sub_main').innerHTML = html;
+}
+
+function ShowStep2()
+{
+	// 增加明确的输入验证码 提示
+	var html = '请输入验证码<br/>';
+	html += '<input name="valid" type="text" value="请输入验证码" size="13" style="color:#666;" id="valid" onfocus="this.select();this.style.color=\'#000\';" onblur="check(this.value,2);" />';
+	html += '<br />';
+	html += '<img src="/msub_image.html?type=small&s='+imageCode+'" align="absmiddle" /> <input type="submit" name="Submit" value="提交" onclick="PostValidCode();" />';
+	$('mail_sub_main').innerHTML = html;
+}
+
+function check(value,type)
+{
+	if (type==1)
+	{
+		if (!value||value=='请输入邮件地址')
+		{
+			$('email').style.color = '#666';
+			$('email').value = "请输入邮件地址";
+		}
+	}
+	else
+	{
+		if (!value||value=='请输入验证码')
+		{
+			$('valid').style.color = '#666';
+			$('valid').value = "请输入验证码";
+		}
+	}
+}
+document.write('<span style="font-size:12px;color:#333333;">邮件订阅</span>');
+document.write('<div id="mail_sub_main" style="width:128px;">');
+document.write('</div>');
+document.write('<span id="message" style="font-size:12px; color:red;"><br /></span>');
+document.write('<span style="font-size:10px; font-family:Arial; color:#999;" >powered by <a href="http://www.feedsky.com" style="text-decoration:none" target="_blank"><font color="#999999">Feedsky</font></a></span>');
+ShowStep1();
+
+</script><span style="font-size:12px;color:#333333;">邮件订阅</span><div id="mail_sub_main" style="width:128px;"><input name="email" value="请输入邮件地址" size="14" onfocus="this.select();this.style.color='#000';" id="email" onblur="check(this.value,1);" style="color: rgb(102, 102, 102);" type="text"><br><input name="Submit" value="订阅" onclick="PostEmailAddress();" type="submit"></div><span id="message" style="font-size:12px; color:red;"><br></span><span style="font-size:10px; font-family:Arial; color:#999;">powered by <a href="http://www.feedsky.com/" style="text-decoration: none;" target="_blank"><font color="#999999">Feedsky</font></a></span>
+
+</body></html>

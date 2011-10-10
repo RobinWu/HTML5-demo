@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="zh-CN"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>一步一步学做游戏 第五回：熊碰撞蘑菇处理_HTML5研究小组_HTML5教程_HTML5资源_HTML5游戏</title>
+<meta name="robots" content="ALL">
+	<meta name="keywords" content="一步一步学做游戏 第五回：熊碰撞蘑菇处理,HTML5资源,HTML5学习,HTML5文档,HTML5资料,HTML5教程,HTML5游戏,HTML5案例">
+	<meta name="description" content="">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="stylesheet" type="text/css" media="all" href="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/style.css">
+<!--[if IE]>
+<link type="text/css" href="http://www.mhtml5.com/wp-content/themes/windPaled/ie.css" rel="stylesheet" media="all" />
+<![endif]-->
+<link rel="pingback" href="http://www.mhtml5.com/xmlrpc.php">
+<link rel="shortcut icon" href="http://www.mhtml5.com/favicon.ico" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="HTML5研究小组 » feed" href="http://www.mhtml5.com/feed">
+<link rel="alternate" type="application/rss+xml" title="HTML5研究小组 » 评论 feed" href="http://www.mhtml5.com/comments/feed">
+<link rel="stylesheet" id="contact-form-7-css" href="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/styles.css" type="text/css" media="all">
+<script type="text/javascript" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/l10n.js"></script>
+<script type="text/javascript" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/comment-reply.js"></script>
+<script type="text/javascript" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/jquery_002.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.mhtml5.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.mhtml5.com/wp-includes/wlwmanifest.xml"> 
+<link rel="index" title="HTML5研究小组" href="http://www.mhtml5.com/">
+<link rel="start" title="HTML5与HTML4功能比较" href="http://www.mhtml5.com/2009/07/221.html">
+<link rel="prev" title="一步一步学做游戏 第四回：熊碰撞边界处理" href="http://www.mhtml5.com/resources/%e4%b8%80%e6%ad%a5%e4%b8%80%e6%ad%a5%e5%ad%a6%e5%81%9a%e6%b8%b8%e6%88%8f-%e7%ac%ac%e5%9b%9b%e5%9b%9e%ef%bc%9a%e7%86%8a%e7%a2%b0%e6%92%9e%e8%be%b9%e7%95%8c%e5%a4%84%e7%90%86">
+<link rel="next" title="一步一步学做游戏 第六回：绘制奖品" href="http://www.mhtml5.com/resources/%e4%b8%80%e6%ad%a5%e4%b8%80%e6%ad%a5%e5%ad%a6%e5%81%9a%e6%b8%b8%e6%88%8f-%e7%ac%ac%e5%85%ad%e5%9b%9e%ef%bc%9a%e7%bb%98%e5%88%b6%e5%a5%96%e5%93%81">
+<meta name="generator" content="WordPress 3.1.2">
+
+<!-- All in One SEO Pack 1.6.13.4 by Michael Torbert of Semper Fi Web Design[-1,-1] -->
+<link rel="canonical" href="http://www.mhtml5.com/resources/%e4%b8%80%e6%ad%a5%e4%b8%80%e6%ad%a5%e5%ad%a6%e5%81%9a%e6%b8%b8%e6%88%8f-%e7%ac%ac%e4%ba%94%e5%9b%9e%ef%bc%9a%e7%86%8a%e7%a2%b0%e6%92%9e%e8%98%91%e8%8f%87%e5%a4%84%e7%90%86">
+<!-- /all in one seo pack -->
+<!-- Social Medias Connect 1.7.0 by qiqiboy support Fcebook, RenRen, KaiXin, SINA weibo, Tencent weibo, SOHU weibo, Douban, Twitter...connection with WordPress --><script type="text/javascript" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/social-medias-connect.js"></script><link rel="stylesheet" media="all" href="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/style_002.css" type="text/css"><!-- End Social Medias Connect 1.7.0 -->   <link rel="stylesheet" href="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/tdomf-style-form.css" type="text/css" media="screen">
+   <!-- WP-Members version 2.3.2, available at http://butlerblog.com/wp-members -->
+
+<link rel="stylesheet" href="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/wp-syntax.css" type="text/css" media="screen">
+</head>
+
+<body><link type="text/css" rel="stylesheet" href="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/jiathis_share.css"><iframe style="position: fixed; display: none; opacity: 0;" frameborder="0"></iframe><div style="position: absolute; z-index: 1000000000; display: none; top: 50%; left: 50%; overflow: auto;" id="ckepop"></div><div style="position: absolute; z-index: 1000000000; display: none; overflow: auto;" id="ckepop"></div><iframe src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/jiathis_utility.html" style="display: none;" frameborder="0"></iframe>
+<div id="wrapper" class="wrapper">
+	<div id="wrapper_inner" class="wrapper">
+			<div id="header">
+		<div id="masthead">
+			
+			<div id="branding">
+			
+								<div id="site-title">
+					<span>
+						<a href="http://www.mhtml5.com/" title="HTML5研究小组" rel="home">HTML5研究小组</a>
+					</span>
+				</div>
+				<div id="site-description">致力于HTML5在中国的发展与应用</div>
+				<div id="header-logo">
+					<a target="_blank" href="http://blog.sina.com.cn/u/1911313045">
+						<img src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/codejam.png" alt="HTML5 code Jam">
+					</a>
+				</div>
+			</div><!-- #branding -->
+			<div id="menu-header">
+						<div id="menu-area" class="menu-html5-container"><ul id="menu" class="menu"><li id="menu-item-44" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-44"><a href="http://www.mhtml5.com/">HOME|首页</a></li>
+<li id="menu-item-9" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-9"><a class=" subItem" href="http://www.mhtml5.com/application">Application|应用</a>
+<ul style="visibility: hidden; position: absolute; display: block;" class="sub-menu">
+	<li id="menu-item-1955" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1955"><a href="http://www.mhtml5.com/application-games">Games|游戏</a></li>
+	<li id="menu-item-1954" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1954"><a href="http://www.mhtml5.com/application-apps">Apps|应用</a></li>
+</ul>
+</li>
+<li id="menu-item-578" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-578"><a href="http://www.mhtml5.com/events">EVENTS|活动</a></li>
+<li id="menu-item-10" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10"><a href="http://www.mhtml5.com/resources">Resources|资源</a></li>
+<li id="menu-item-6" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6"><a href="http://www.mhtml5.com/about">ABOUT|关于我们</a></li>
+<li id="menu-item-993" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-993"><a href="http://www.mhtml5.com/guestbook">BOARD|留言问答</a></li>
+</ul></div>			</div>
+		</div><!-- #masthead -->
+	</div><!-- #header -->
+
+	<div id="main">
+	<div id="breadbar">
+		<div id="search">
+				<form role="search" method="get" id="searchform" action="http://www.mhtml5.com">
+	<span class="bo"><span class="bi">
+		<input class=" thetips" value="搜索" name="s" id="s" type="text">
+		<input value="" id="searchsubmit" type="submit">
+	</span></span>
+    </form>		</div>
+	</div>
+		<div id="container">
+			<div id="content">
+
+
+				<div id="post-153" class="post-153 resources type-resources status-publish hentry post">
+					<div class="datedot">
+						<abbr title="上午 11:37" class="published">
+							<span class="day">14</span><br>
+							<span class="month">二月</span>
+						</abbr>
+					</div>
+					<div class="entry-wrapper">
+						<div class="entry-title"><h1><a href="http://www.mhtml5.com/resources/%e4%b8%80%e6%ad%a5%e4%b8%80%e6%ad%a5%e5%ad%a6%e5%81%9a%e6%b8%b8%e6%88%8f-%e7%ac%ac%e4%ba%94%e5%9b%9e%ef%bc%9a%e7%86%8a%e7%a2%b0%e6%92%9e%e8%98%91%e8%8f%87%e5%a4%84%e7%90%86" title="查看 一步一步学做游戏 第五回：熊碰撞蘑菇处理" rel="bookmark">一步一步学做游戏 第五回：熊碰撞蘑菇处理</a></h1></div>
+
+						<div class="entry-meta">
+							类别: <a href="http://www.mhtml5.com/res_category/example" rel="tag">HTML5 FILE API 应用实例</a>						</div><!-- .entry-meta -->
+
+						<div class="entry-content">
+							<p>第五回主要讲熊碰到<a href="http://www.html5china.com/">蘑菇</a>之后向上反弹的效果</p>
+<p>预期达到的效果：<a href="http://www.html5china.com/html5games/mogu/index4.html" target="_blank">http://www.html5china.com/html5games/mogu/index4.html</a></p>
+<p><strong>一、由于碰撞的地方比较多，所以定义一个通用的判断2个<a href="http://www.html5china.com/" target="_blank">物体</a>是否碰撞的函数</strong></p>
+<div>
+<div>JavaScript Code复制内容到剪贴板</div>
+<div id="code_7197">
+<ol>
+<li>//方法用途：检测2个物体是否碰撞 &nbsp;&nbsp;</li>
+<li>//参数object1：物体1 &nbsp;&nbsp;</li>
+<li>//参数object1：物体2 &nbsp;&nbsp;</li>
+<li>//参数overlap：可重叠的区域值 &nbsp;&nbsp;</li>
+<li>//返回布尔值：碰撞返回true，不碰撞返回false &nbsp;&nbsp;</li>
+<li>function&nbsp;CheckIntersect(object1,&nbsp;object2,&nbsp;overlap) &nbsp;&nbsp;</li>
+<li>{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;x-
+轴&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x-
+轴 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;A1——&gt;B1&nbsp;C1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A2——&gt;B2&nbsp;C2
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;+——–+&nbsp;&nbsp;&nbsp;^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+——–+&nbsp;&nbsp;&nbsp;^
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;|&nbsp;object1|&nbsp;&nbsp;&nbsp;|&nbsp;y-
+轴&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;object2|&nbsp;&nbsp;&nbsp;|&nbsp;y-
+轴 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;+——–+&nbsp;&nbsp;D1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+——–+&nbsp;&nbsp;D2
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;看图可知两物体各4个点的位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;A1&nbsp;=&nbsp;object1.x&nbsp;+&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;B1&nbsp;=&nbsp;object1.x&nbsp;+&nbsp;object1.image.width&nbsp;-&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;C1&nbsp;=&nbsp;object1.y&nbsp;+&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;D1&nbsp;=&nbsp;object1.y&nbsp;+&nbsp;object1.image.height&nbsp;-&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;A2&nbsp;=&nbsp;object2.x&nbsp;+&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;B2&nbsp;=&nbsp;object2.x&nbsp;+&nbsp;object2.image.width&nbsp;-&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;C2&nbsp;=&nbsp;object2.y&nbsp;+&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;D2&nbsp;=&nbsp;object2.y&nbsp;+&nbsp;object2.image.width&nbsp;-&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//假如他们在x-轴重叠 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;if(A1&nbsp;&gt;&nbsp;A2&nbsp;&amp;&amp;&nbsp;A1&nbsp;&lt;&nbsp;B2 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;B1&nbsp;&gt;&nbsp;A2&nbsp;&amp;&amp;&nbsp;B1&nbsp;&lt;&nbsp;B2) &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//判断y-轴重叠 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(C1&nbsp;&gt;&nbsp;C2&nbsp;&amp;&amp;&nbsp;C1&nbsp;&lt;&nbsp;D1 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;D1&nbsp;&gt;&nbsp;C2&nbsp;&amp;&amp;&nbsp;D1&nbsp;&lt;&nbsp;D2) &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//碰撞 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false; &nbsp;&nbsp;</li>
+<li>}&nbsp;&nbsp;</li>
+</ol>
+</div>
+</div>
+<p><strong>二、<a href="http://www.html5china.com/" target="_blank">熊碰撞蘑菇</a>发生的事件以及处理</strong></p>
+<div>
+<div>JavaScript Code复制内容到剪贴板</div>
+<div id="code_4218">
+<ol>
+<li>//动物碰撞蘑菇 &nbsp;&nbsp;</li>
+<li>function&nbsp;HasAnimalHitMushroom() &nbsp;&nbsp;</li>
+<li>{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//假如碰撞 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;if(CheckIntersect(animal,&nbsp;mushroom,&nbsp;5)) &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//假如碰撞的位置属于蘑菇的左下位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((animal.x&nbsp;+&nbsp;animal.image.width/2)&nbsp;&lt;&nbsp;(mushroom.x&nbsp;+&nbsp;mushroom.image.width*0.25))
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&nbsp;-speed;//反弹 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//假如碰撞的位置属于蘑菇的左上位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if((animal.x&nbsp;+&nbsp;animal.image.width/2)&nbsp;&lt;&nbsp;(mushroom.x&nbsp;+&nbsp;mushroom.image.width*0.5))
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//反弹速度减半 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&nbsp;-speed/2; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//假如碰撞的位置属于蘑菇的右上位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if((animal.x&nbsp;+&nbsp;animal.image.width/2)&nbsp;&lt;&nbsp;(mushroom.x&nbsp;+&nbsp;mushroom.image.width*0.75))
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&nbsp;speed/2; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&nbsp;speed; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;verticalSpeed&nbsp;=&nbsp;-speed;//改变垂直速度。也即动物向上移动 &nbsp;&nbsp;</li>
+<li>&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>}&nbsp;&nbsp;</li>
+</ol>
+</div>
+</div>
+<p><strong>三、在游戏循环GameLoop()尾部中加入<a href="http://www.html5china.com/" target="_blank">熊碰撞蘑菇</a>函数，如下</strong></p>
+<div>
+<div>JavaScript Code复制内容到剪贴板</div>
+<div id="code_2756">
+<ol>
+<li>//游戏功能循环 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;function&nbsp;GameLoop()&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//清除屏幕&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.clearRect(0,&nbsp;0,&nbsp;screenWidth,&nbsp;screenHeight);&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.save();&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//绘制背景&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.drawImage(backgroundForestImg,&nbsp;0,&nbsp;0);&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//绘制蘑菇&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.drawImage(mushroom.image,&nbsp;mushroom.x,&nbsp;mushroom.y);&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//绘制熊 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//改变移动动物X和Y位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;animal.x&nbsp;+=&nbsp;horizontalSpeed; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;animal.y&nbsp;+=&nbsp;verticalSpeed; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//改变翻滚角度 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;animal.angle&nbsp;+=&nbsp;bearAngle; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//以当前熊的中心位置为基准 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.translate(animal.x&nbsp;+&nbsp;(animal.image.width/2),&nbsp;animal.y&nbsp;+&nbsp;(animal.image.height/2));
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//根据当前熊的角度轮换 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;ctx.rotate(animal.angle&nbsp;*&nbsp;Math.PI/180); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//描绘熊 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;ctx.drawImage(animal.image,&nbsp;-&nbsp;(animal.image.width/2),&nbsp;-&nbsp;(animal.image.height/2));
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.restore(); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//检测是否碰到边界 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;HasAnimalHitEdge(); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//检测熊碰撞蘑菇 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;HasAnimalHitMushroom(); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+</ol>
+</div>
+</div>
+<p><strong>到此第五回的完整代码如下：</strong></p>
+<div>
+<div>折叠展开XML/HTML Code复制内容到剪贴板</div>
+<div id="code_7771">
+<ol>
+<li>&lt;!DOCTYPE&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;html&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;head&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;meta&nbsp;http-equiv=”Content-Type”&nbsp;content=”text/html;&nbsp;charset=utf-8″&nbsp;/&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;title&gt;蘑菇动起来-html5中文网&lt;/title&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;!–&nbsp;要记得引用jquery-1.4.2.js&nbsp;–&gt;&nbsp;&nbsp;</li>
+<li>&lt;script&nbsp;type=”text/javascript”&nbsp;src=”./js/jquery-1.4.2.js”&gt;&lt;/script&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;script&nbsp;type=”text/javascript”&nbsp;&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//全局变量&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;backgroundForestImg&nbsp;=&nbsp;new&nbsp;Image();//森林背景图&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;mushroomImg&nbsp;=&nbsp;new&nbsp;Image();//蘑菇&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;bearEyesClosedImg&nbsp;=&nbsp;new&nbsp;Image();//闭着眼睛的熊熊&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;ctx;//2d画布&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;screenWidth;//画布宽度&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;screenHeight;//画布高度&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;speed&nbsp;=&nbsp;2;//不变常量,从新开始的速度&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;horizontalSpeed&nbsp;=&nbsp;speed;//水平速度,随着熊的碰撞会发生改变 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;verticalSpeed&nbsp;=&nbsp;-speed;&nbsp;//垂直速度,开始肯定是要向上飘，所以要负数，随着熊的碰撞会发生改变 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;bearAngle&nbsp;=&nbsp;2;//熊旋转的速度 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//公用&nbsp;定义一个游戏物体戏对象&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;GameObject()&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.x&nbsp;=&nbsp;0;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.y&nbsp;=&nbsp;0;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.image&nbsp;=&nbsp;null;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//定义蘑菇Mushroom&nbsp;继承游戏对象GameObject&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;Mushroom()&nbsp;{};&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;Mushroom.prototype&nbsp;=&nbsp;new&nbsp;GameObject();//游戏对象GameObject&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//蘑菇实例&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;mushroom&nbsp;=&nbsp;new&nbsp;
+Mushroom();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//循环描绘物
+体&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//定义动物熊&nbsp;Animal&nbsp;继承&nbsp;游戏对象GameObject &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;Animal()&nbsp;{}; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;Animal.prototype&nbsp;=&nbsp;new&nbsp;GameObject();//游戏对象GameObject &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;Animal.prototype.angle&nbsp;=&nbsp;0;//动物的角度，目前中（即作为动物它在屏幕上旋转退回） &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//定义熊实例&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;animal&nbsp;=&nbsp;new&nbsp;Animal(); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//游戏功能循环 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;GameLoop()&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//清除屏幕&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.clearRect(0,&nbsp;0,&nbsp;screenWidth,&nbsp;screenHeight);&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.save();&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//绘制背景&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.drawImage(backgroundForestImg,&nbsp;0,&nbsp;0);&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//绘制蘑菇&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.drawImage(mushroom.image,&nbsp;mushroom.x,&nbsp;mushroom.y);&nbsp;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//绘制熊 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//改变移动动物X和Y位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal.x&nbsp;+=&nbsp;horizontalSpeed; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal.y&nbsp;+=&nbsp;verticalSpeed; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//改变翻滚角度 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal.angle&nbsp;+=&nbsp;bearAngle; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//以当前熊的中心位置为基准 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.translate(animal.x&nbsp;+&nbsp;(animal.image.width/2),&nbsp;animal.y&nbsp;+&nbsp;(animal.image.height/2));
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//根据当前熊的角度轮换 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.rotate(animal.angle&nbsp;*&nbsp;Math.PI/180); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//描绘熊 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.drawImage(animal.image,&nbsp;-&nbsp;(animal.image.width/2),&nbsp;-&nbsp;(animal.image.height/2));
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.restore(); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//检测是否碰到边界 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HasAnimalHitEdge(); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//检测熊碰撞蘑菇 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HasAnimalHitMushroom(); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//加载图片&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;LoadImages()&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mushroomImg.src&nbsp;=&
+nbsp;”images/mushroom.png”;//蘑菇&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backgroundForestImg.src&nbsp;=&
+nbsp;”images/forest1.jpg”;//森林背景图&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bearEyesClosedImg.src&nbsp;=&
+nbsp;”images/bear_eyesclosed.png”;//闭着眼睛的 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mushroom.image&nbsp;=&nbsp;mushroomImg;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal.image&nbsp;=&nbsp;bearEyesClosedImg; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//熊碰撞边界 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;HasAnimalHitEdge() &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//熊碰到右边边界 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(animal.x&gt;screenWidth&nbsp;-&nbsp;animal.image.width) &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(horizontalSpeed&nbsp;&gt;&nbsp;0)//
+假如向右移动 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=-horizontalSpeed;
+//改变水平速度方向 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//熊碰到左边边界 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(animal.x&lt;-10) &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(horizontalSpeed&nbsp;&lt;&nbsp;0)//
+假如向左移动 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&
+nbsp;-horizontalSpeed;//改变水平速度方向 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//熊碰到下面边界 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(animal.y&gt;screenHeight&nbsp;-&nbsp;animal.image.height) &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//2秒钟后从新开始 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setTimeout(function(){ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&nbsp;speed;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;verticalSpeed&nbsp;=&nbsp;-speed;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal.x&nbsp;=&nbsp;parseInt(screenWidth/2);
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal.y&nbsp;=&nbsp;parseInt(screenHeight/2);
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gameLoop(); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},&nbsp;2000); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//熊碰到上边边界 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(animal.y&lt;0) &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;verticalSpeed&nbsp;=&nbsp;-verticalSpeed; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//事件处理&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;AddEventHandlers()&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//鼠标移动则蘑菇跟着移动&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(“#container”).mousemove(function(e){&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mushroom.x&nbsp;=&nbsp;e.pageX&nbsp;-&nbsp;(mushroom.image.width/2);&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//方法用途：检测2个物体是否碰撞 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//参数object1：物体1 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//参数object1：物体2 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//参数overlap：可重叠的区域值 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//返回布尔值：碰撞返回true，不碰撞返回false &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;CheckIntersect(object1,&nbsp;object2,&nbsp;overlap) &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;&nbsp;&nbsp;x-
+轴&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x-
+轴 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;A1——&gt;B1&nbsp;C1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A2——&gt;B2&nbsp;C2
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;+——–+&nbsp;&nbsp;&nbsp;^&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+——–+&nbsp;&nbsp;&nbsp;^
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;|&nbsp;object1|&nbsp;&nbsp;&nbsp;|&nbsp;y-
+轴&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;object2|&nbsp;&nbsp;&nbsp;|&nbsp;y-
+轴 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;|
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;+——–+&nbsp;&nbsp;D1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+——–+&nbsp;&nbsp;D2
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;看图可知两物体各4个点的位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A1&nbsp;=&nbsp;object1.x&nbsp;+&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B1&nbsp;=&nbsp;object1.x&nbsp;+&nbsp;object1.image.width&nbsp;-&nbsp;overlap;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C1&nbsp;=&nbsp;object1.y&nbsp;+&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D1&nbsp;=&nbsp;object1.y&nbsp;+&nbsp;object1.image.height&nbsp;-&nbsp;overlap;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A2&nbsp;=&nbsp;object2.x&nbsp;+&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B2&nbsp;=&nbsp;object2.x&nbsp;+&nbsp;object2.image.width&nbsp;-&nbsp;overlap;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;C2&nbsp;=&nbsp;object2.y&nbsp;+&nbsp;overlap; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;D2&nbsp;=&nbsp;object2.y&nbsp;+&nbsp;object2.image.width&nbsp;-&nbsp;overlap;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//假如他们在x-轴重叠 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(A1&nbsp;&gt;&nbsp;A2&nbsp;&amp;&amp;&nbsp;A1&nbsp;&lt;&nbsp;B2&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;B1&nbsp;&gt;&nbsp;A2&nbsp;&amp;&amp;&nbsp;B1&nbsp;&lt;&nbsp;B2)
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//判断y-轴重叠 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(C1&nbsp;&gt;&nbsp;C2&nbsp;&amp;&amp;&nbsp;C1&nbsp;&lt;&nbsp;D1&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;D1&nbsp;&gt;&nbsp;C2&nbsp;&amp;&amp;&nbsp;D1&nbsp;&lt;&nbsp;D2)
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//碰撞 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;true; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;false; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//动物碰撞蘑菇 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;function&nbsp;HasAnimalHitMushroom() &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//假如碰撞 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(CheckIntersect(animal,&nbsp;mushroom,&nbsp;5)) &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//假如碰撞的位置属于蘑菇的左下位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if((animal.x&nbsp;+&nbsp;animal.image.width/2)&nbsp;&lt;&nbsp;(mushroom.x&nbsp;+&nbsp;mushroom.image.width*0.25))
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&
+nbsp;-speed;//反弹 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//假如碰撞的位置属于蘑菇的左上位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if((animal.x&nbsp;+&nbsp;animal.image.width/2)&nbsp;&lt;&nbsp;(mushroom.x&nbsp;+&nbsp;mushroom.image.width*0.5))
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//反弹速度减半 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&nbsp;-speed/2;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//假如碰撞的位置属于蘑菇的右上位置 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if((animal.x&nbsp;+&nbsp;animal.image.width/2)&nbsp;&lt;&nbsp;(mushroom.x&nbsp;+&nbsp;mushroom.image.width*0.75))
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&nbsp;speed/2;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontalSpeed&nbsp;=&nbsp;speed;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;verticalSpeed&nbsp;=&
+nbsp;-speed;//改变垂直速度。也即动物向上移动 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;} &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;//初始化&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;$(window).ready(function(){&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AddEventHandlers();//添加事件&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LoadImages();&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx&nbsp;=&nbsp;
+document.getElementById(‘canvas’).getContext(’2d’);&nbsp;//获取2d画
+布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screenWidth&nbsp;=&
+nbsp;parseInt($(“#canvas”).attr(“width”));&nbsp;//画布宽度&nbsp; 
+&nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;screenHeight&nbsp;=&nbsp;parseInt($(“#canvas”).attr(“height”));&nbsp;&nbsp;&nbsp;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//初始化蘑菇 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mushroom.x&nbsp;=&
+nbsp;parseInt(screenWidth/2);//&nbsp;蘑菇X坐标&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mushroom.y&nbsp;=&
+nbsp;screenHeight&nbsp;-&nbsp;40;//蘑菇Y坐标&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//初始化熊 &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal.x&nbsp;=&nbsp;parseInt(screenWidth/2); &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animal.y&nbsp;=&nbsp;parseInt(screenHeight/2);&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setInterval(GameLoop,&nbsp;10);&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;});&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;/script&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;/head&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;body&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&nbsp;id=”container”&nbsp;style=”border:1px&nbsp;solid;&nbsp;cursor:none;&nbsp;width:480px;&nbsp;height:320px;”&gt;&nbsp;&nbsp;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;canvas&nbsp;id=”canvas”&nbsp;width=”480″&nbsp;height=”320″&nbsp;&gt;&nbsp;
+ &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;浏览器不支持
+html5,&lt;a&nbsp;target=”_blank”&nbsp;href=”http://www.html5china.com
+/help/browser.html”&gt;请下载&lt;/a&gt;支持html5的浏览器来观看&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/canvas&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+<li>&lt;/html&gt;&nbsp;&nbsp; &nbsp;&nbsp;</li>
+</ol>
+</div>
+</div>
+<p>第五回就讲到这了，第六回讲描绘<a href="http://www.html5china.com/" target="_blank">奖品</a>&nbsp; 作者：深邃老马 转载自：html5中文网</p>
+																											</div><!-- .entry-content -->
+
+						
+					</div>
+					<div class="entry-share">
+							<!-- JiaThis Button BEGIN -->
+						<div id="ckepop">
+							<a href="http://www.jiathis.com/share/" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank">分享</a>
+							<span class="jiathis_separator">|</span>
+							<a title="分享到QQ空间" class="jiathis_button_icons_1"><span class="jiathis_txt jtico jtico_qzone"></span></a>
+							<a title="分享到新浪微博" class="jiathis_button_icons_2"><span class="jiathis_txt jtico jtico_tsina"></span></a>
+							<a title="分享到腾讯微博" class="jiathis_button_icons_3"><span class="jiathis_txt jtico jtico_tqq"></span></a>
+							<a title="分享到人人网" class="jiathis_button_icons_4"><span class="jiathis_txt jtico jtico_renren"></span></a>
+						</div>
+						<!-- JiaThis Button END -->
+					</div><!-- .entry-utility -->
+				</div><!-- #post-## -->
+				<div id="nav-below">
+					<h3 class="box-title">相关文章</h3>
+					<ul class="related_post"><li><a href="http://www.mhtml5.com/2011/03/668.html" title="HTML5研究小组第2期HTML5技术讲座：手把手教你开发HTML5游戏《脆弱的玛丽奥》">HTML5研究小组第2期HTML5技术讲座：手把手教你开发HTML5游戏《脆弱的玛丽奥》</a> (96)</li><li><a href="http://www.mhtml5.com/2011/02/635.html" title="HTML5研究小组：首次讲座《深入websocket》限额秒杀中">HTML5研究小组：首次讲座《深入websocket》限额秒杀中</a> (66)</li><li><a href="http://www.mhtml5.com/2011/04/1093.html" title="我是Html5“控”">我是Html5“控”</a> (16)</li><li><a href="http://www.mhtml5.com/2011/08/2404.html" title="报告！【北京Party——第一弹】归来，聚散有时情犹在！">报告！【北京Party——第一弹】归来，聚散有时情犹在！</a> (13)</li><li><a href="http://www.mhtml5.com/2010/12/74.html" title="HTML 5成IE9核心 亲密无间还是同床异梦">HTML 5成IE9核心 亲密无间还是同床异梦</a> (12)</li></ul>				</div><!-- #nav-below -->
+
+			</div><!-- #content -->
+		</div><!-- #container -->
+
+
+		<div id="sidebar" class="widget-area">
+			<div class="postnews">
+				<a title="向我们投递您看到的知识，帮助更多人了解世界" href="http://www.mhtml5.com/post-news">我要投递新闻</a>
+			</div>
+			<ul class="xoxo">
+
+<li id="text-8" class="widget widget_text">			<div class="textwidget"><a href="http://www.mhtml5.com/wzk"><img src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/wzk_dl.png" alt="微周刊下载"></a>
+
+<a href="http://www.mhtml5.com/ppt"><img src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/PPT.jpg" alt="学习资源下载"></a>
+
+</div>
+		</li><li id="text-6" class="widget widget_text"><h3 class="widget-title">合作广告</h3>			<div class="textwidget"><div class="widgets-ad">
+<a href="http://developer.zte.com.cn:8080/"><img src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/09.jpg" alt="中兴通讯郑和杯手机应用创作挑战赛"></a>
+<table class="widgets-ad" style="line-height: 13px;">
+ <tbody>
+    <tr><td><a href="http://game.mhtml5.com/" title="HTML5游戏大赛"><img src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/a.jpg" alt=""></a></td><td style="vertical-align: top;"><table><tbody><tr><td><a href="http://www.mhtml5.com/job" title="职场机会"><img class="widget-ad-little" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/_01.jpg" alt=""></a></td></tr><tr><td><a href="http://www.mhtml5.com/collection" title="征集令"><img class="widget-ad-little" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/_03.jpg" alt=""></a></td></tr></tbody></table></td></tr>
+ </tbody>
+</table>
+<div class="widgets-ad">
+<a href="http://www.gdcchina.cn/conference/social"><img src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/banner_265130.jpg" alt="2011游戏开发者大会"></a>
+</div>
+		</div></div></li><li id="text-3" class="widget widget_text"><h3 class="widget-title">HTML5研究小组</h3>			<div class="textwidget"><div style="color:#666"><strong>专注HTML5在中国的发展与应用！</strong> <span>&nbsp;    </span><br>
+<strong>致力HTML5的交流、分享、推广！</strong><br>
+<span>&nbsp;    </span><br>
+<strong><b>新浪微博</b>：</strong><a href="http://weibo.com/mhtml5" title="HTML5研究小组官方微博">http://weibo.com/mhtml5</a>
+<p style="height:10px"></p>
+<p><strong><b>腾讯微博</b>：</strong><a href="http://t.qq.com/mhtml5" title="HTML5研究小组官方微博">http://t.qq.com/mhtml5</a>
+</p><p style="height:10px"></p>
+<p><strong><b>搜狐微博</b>：</strong><a href="http://t.sohu.com/mhtml5" title="HTML5研究小组官方微博">http://t.sohu.com/mhtml5</a>
+</p><p style="height:10px"></p>
+<p><strong><b>网易微博</b>：</strong><a href="http://t.163.com/mhtml5" title="HTML5研究小组官方微博">http://t.163.com/mhtml5</a>
+</p><p style="height:10px"></p>
+<p><strong>围观直播：</strong><a href="http://weiguan.com/mhtml5" title="HTML5研究小组活动直播">http://weiguan.com/mhtml5</a>
+</p><p style="height:10px"></p>
+<p><strong>QQ群：</strong><br>
+         HTML5开发者高端12群(173728812)<br>
+ <span>&nbsp;    </span><br>
+         HTML5研究小组上海分群4(65507211);<br>
+         HTML5研究小组广东3群(138464082);<br>
+         HTML5研究小组成都分群(148517998);<br>
+         HTML5研究小组南京分群(148667374);<br>
+         HTML5研究小组杭州分群(117103819);<br>
+         HTML5研究小组深圳分群(151720057);<br>
+         HTML5研究小组武汉分群(170937503)<br>
+ <span>&nbsp;    </span><br>
+         HTML5研究小组WebGL一群(144634933);<br>
+ <span>&nbsp;    </span><br>
+ <strong>合作联系人：</strong>16047574@qq.com<br>
+ <span>&nbsp;    </span> </p>
+</div>
+		</div></li>	<li id="text-4" class="widget widget_text"><h3 class="widget-title">微博</h3>			<div class="textwidget"><iframe class="share_self" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/WeiboShow.html" frameborder="0" height="550" scrolling="no" width="100%"></iframe></div>
+		</li><li id="text-5" class="widget widget_text"><h3 class="widget-title">订阅</h3>			<div class="textwidget"><iframe src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/msub_ajax.html" marginwidth="0" marginheight="0" name="fm" border="0" allowtransparency="true" style="background-color: transparent;" align="top" frameborder="0" height="100" scrolling="no" width="125"></iframe></div>
+		</li>	<li id="recentpost" class="widget">
+		<h3 class="widget-title">最新文章</h3>
+		<ul>
+		<ul id="wp-recent-posts"><li id="recent-post-2807" class="recent-post"><div class="recent-post-title"><a title="中兴通讯“郑和杯”手机应用创作挑战赛" class="recent-post-link" href="http://www.mhtml5.com/2011/09/2807.html">中兴通讯“郑和杯”手机应用创作挑战赛</a></div></li><li id="recent-post-3056" class="recent-post"><div class="recent-post-title"><a title="国内HTML5移动社交游戏《玛雅2012》首次登陆日本GREE" class="recent-post-link" href="http://www.mhtml5.com/2011/10/3056.html">国内HTML5移动社交游戏《玛雅2012》首次登陆日本GREE</a></div></li><li id="recent-post-3053" class="recent-post"><div class="recent-post-title"><a title="《屋顶狂奔》（Canabalt）开发者分享小团队的商业开发机会" class="recent-post-link" href="http://www.mhtml5.com/2011/10/3053.html">《屋顶狂奔》（Canabalt）开发者分享小团队的商业开发机会</a></div></li><li id="recent-post-3048" class="recent-post"><div class="recent-post-title"><a title="Kabam揭秘社交平台开发MMO游戏的成功要素" class="recent-post-link" href="http://www.mhtml5.com/2011/10/3048.html">Kabam揭秘社交平台开发MMO游戏的成功要素</a></div></li><li id="recent-post-3046" class="recent-post"><div class="recent-post-title"><a title="传Facebook移动开发平台下周正式亮相" class="recent-post-link" href="http://www.mhtml5.com/2011/10/3046.html">传Facebook移动开发平台下周正式亮相</a></div></li><li id="recent-post-3044" class="recent-post"><div class="recent-post-title"><a title="Mozilla正开发Gladius3D网页游戏引擎" class="recent-post-link" href="http://www.mhtml5.com/2011/10/3044.html">Mozilla正开发Gladius3D网页游戏引擎</a></div></li><li id="recent-post-3042" class="recent-post"><div class="recent-post-title"><a title="微软10月将发布8个补丁修复23个安全漏洞‎" class="recent-post-link" href="http://www.mhtml5.com/2011/10/3042.html">微软10月将发布8个补丁修复23个安全漏洞‎</a></div></li><li id="recent-post-3041" class="recent-post"><div class="recent-post-title"><a title="2015年全球移动应用下载量将达980亿次‎" class="recent-post-link" href="http://www.mhtml5.com/2011/10/3041.html">2015年全球移动应用下载量将达980亿次‎</a></div></li><li id="recent-post-3040" class="recent-post"><div class="recent-post-title"><a title="Mozilla CEO 描绘 Firefox 的移动战略" class="recent-post-link" href="http://www.mhtml5.com/2011/10/3040.html">Mozilla CEO 描绘 Firefox 的移动战略</a></div></li><li id="recent-post-more" class="recent-post" style="text-align:center"><div><a style="display: block; width: 100%; height: 100%;" href="javascript:;" onclick="WARP.get_recent_posts('number=8&amp;cmtcount=0&amp;excerpt=0&amp;length=100&amp;offset=8')">查看更多</a></div></li></ul>		</ul>
+	</li>	
+	<li id="tag_cloud" class="widget">
+		<h3 class="widget-title">标签云</h3>
+		<div class="tag_area">
+			<a href="http://www.mhtml5.com/tag/%e8%b0%b7%e6%ad%8c" class="tag-link-180" title="16 个话题" style="font-size: 11.0612pt;">谷歌</a>
+<a href="http://www.mhtml5.com/tag/%e8%8b%b9%e6%9e%9c" class="tag-link-38" title="18 个话题" style="font-size: 11.2653pt;">苹果</a>
+<a href="http://www.mhtml5.com/tag/%e7%a7%bb%e5%8a%a8%e4%ba%92%e8%81%94%e7%bd%91" class="tag-link-111" title="2 个话题" style="font-size: 8pt;">移动互联网</a>
+<a href="http://www.mhtml5.com/tag/%e7%a3%8a%e5%8f%8b" class="tag-link-64" title="9 个话题" style="font-size: 10.1224pt;">磊友</a>
+<a href="http://www.mhtml5.com/tag/%e7%81%ab%e7%8b%90" class="tag-link-31" title="11 个话题" style="font-size: 10.449pt;">火狐</a>
+<a href="http://www.mhtml5.com/tag/%e6%b5%8f%e8%a7%88%e5%99%a8" class="tag-link-61" title="15 个话题" style="font-size: 10.9388pt;">浏览器</a>
+<a href="http://www.mhtml5.com/tag/%e6%99%ba%e8%83%bd%e6%89%8b%e6%9c%ba" class="tag-link-77" title="4 个话题" style="font-size: 8.89796pt;">智能手机</a>
+<a href="http://www.mhtml5.com/tag/%e6%89%8b%e6%9c%ba%e6%b8%b8%e6%88%8f" class="tag-link-26" title="9 个话题" style="font-size: 10.1224pt;">手机游戏</a>
+<a href="http://www.mhtml5.com/tag/%e5%be%ae%e8%bd%af" class="tag-link-24" title="26 个话题" style="font-size: 11.8776pt;">微软</a>
+<a href="http://www.mhtml5.com/tag/%e5%bd%93html5%e6%9d%a5%e6%95%b2%e9%97%a8" class="tag-link-87" title="3 个话题" style="font-size: 8.4898pt;">当HTML5来敲门</a>
+<a href="http://www.mhtml5.com/tag/%e5%88%9b%e6%96%b0%e5%b7%a5%e5%9c%ba" class="tag-link-88" title="4 个话题" style="font-size: 8.89796pt;">创新工场</a>
+<a href="http://www.mhtml5.com/tag/zynga" class="tag-link-44" title="4 个话题" style="font-size: 8.89796pt;">Zynga</a>
+<a href="http://www.mhtml5.com/tag/windows-8" class="tag-link-305" title="3 个话题" style="font-size: 8.4898pt;">Windows 8</a>
+<a href="http://www.mhtml5.com/tag/win8" class="tag-link-186" title="7 个话题" style="font-size: 9.71429pt;">win8</a>
+<a href="http://www.mhtml5.com/tag/w3c" class="tag-link-17" title="6 个话题" style="font-size: 9.5102pt;">W3C</a>
+<a href="http://www.mhtml5.com/tag/spil" class="tag-link-33" title="6 个话题" style="font-size: 9.5102pt;">SPIL</a>
+<a href="http://www.mhtml5.com/tag/silverlight" class="tag-link-20" title="2 个话题" style="font-size: 8pt;">Silverlight</a>
+<a href="http://www.mhtml5.com/tag/opera" class="tag-link-52" title="3 个话题" style="font-size: 8.4898pt;">Opera</a>
+<a href="http://www.mhtml5.com/tag/mozilla" class="tag-link-69" title="6 个话题" style="font-size: 9.5102pt;">Mozilla</a>
+<a href="http://www.mhtml5.com/tag/javascript" class="tag-link-12" title="10 个话题" style="font-size: 10.2857pt;">JavaScript</a>
+<a href="http://www.mhtml5.com/tag/iphone" class="tag-link-37" title="7 个话题" style="font-size: 9.71429pt;">iphone</a>
+<a href="http://www.mhtml5.com/tag/ios5" class="tag-link-185" title="4 个话题" style="font-size: 8.89796pt;">ios5</a>
+<a href="http://www.mhtml5.com/tag/ie10" class="tag-link-118" title="8 个话题" style="font-size: 9.91837pt;">ie10</a>
+<a href="http://www.mhtml5.com/tag/ie9" class="tag-link-25" title="13 个话题" style="font-size: 10.7347pt;">IE9</a>
+<a href="http://www.mhtml5.com/tag/html5%e8%b5%84%e6%ba%90" class="tag-link-130" title="6 个话题" style="font-size: 9.5102pt;">html5资源</a>
+<a href="http://www.mhtml5.com/tag/html5%e7%a0%94%e7%a9%b6%e5%b0%8f%e7%bb%84" class="tag-link-76" title="5 个话题" style="font-size: 9.22449pt;">HTML5研究小组</a>
+<a href="http://www.mhtml5.com/tag/html5%e6%b8%b8%e6%88%8f" class="tag-link-99" title="11 个话题" style="font-size: 10.449pt;">HTML5游戏</a>
+<a href="http://www.mhtml5.com/tag/html5%e6%96%b0%e9%97%bb" class="tag-link-9" title="2 个话题" style="font-size: 8pt;">html5新闻</a>
+<a href="http://www.mhtml5.com/tag/html5%e6%95%99%e7%a8%8b" class="tag-link-120" title="4 个话题" style="font-size: 8.89796pt;">HTML5教程</a>
+<a href="http://www.mhtml5.com/tag/html5%e5%ba%94%e7%94%a8" class="tag-link-27" title="7 个话题" style="font-size: 9.71429pt;">html5应用</a>
+<a href="http://www.mhtml5.com/tag/html5-%e8%a7%86%e9%a2%91" class="tag-link-129" title="2 个话题" style="font-size: 8pt;">HTML5 视频</a>
+<a href="http://www.mhtml5.com/tag/html5-javascript" class="tag-link-47" title="3 个话题" style="font-size: 8.4898pt;">HTML5 javascript</a>
+<a href="http://www.mhtml5.com/tag/html5-code-jam" class="tag-link-311" title="3 个话题" style="font-size: 8.4898pt;">HTML5 Code Jam</a>
+<a href="http://www.mhtml5.com/tag/html5" class="tag-link-3" title="277 个话题" style="font-size: 16pt;">HTML5</a>
+<a href="http://www.mhtml5.com/tag/google" class="tag-link-72" title="19 个话题" style="font-size: 11.3469pt;">Google</a>
+<a href="http://www.mhtml5.com/tag/gmail" class="tag-link-45" title="3 个话题" style="font-size: 8.4898pt;">Gmail</a>
+<a href="http://www.mhtml5.com/tag/flash" class="tag-link-149" title="5 个话题" style="font-size: 9.22449pt;">Flash</a>
+<a href="http://www.mhtml5.com/tag/firefox-7" class="tag-link-220" title="3 个话题" style="font-size: 8.4898pt;">Firefox 7</a>
+<a href="http://www.mhtml5.com/tag/firefox" class="tag-link-177" title="8 个话题" style="font-size: 9.91837pt;">Firefox</a>
+<a href="http://www.mhtml5.com/tag/facebook" class="tag-link-30" title="10 个话题" style="font-size: 10.2857pt;">Facebook</a>
+<a href="http://www.mhtml5.com/tag/css3" class="tag-link-28" title="5 个话题" style="font-size: 9.22449pt;">CSS3</a>
+<a href="http://www.mhtml5.com/tag/chrome" class="tag-link-96" title="16 个话题" style="font-size: 11.0612pt;">Chrome</a>
+<a href="http://www.mhtml5.com/tag/build%e5%a4%a7%e4%bc%9a" class="tag-link-307" title="3 个话题" style="font-size: 8.4898pt;">Build大会</a>
+<a href="http://www.mhtml5.com/tag/android" class="tag-link-43" title="10 个话题" style="font-size: 10.2857pt;">android</a>
+<a href="http://www.mhtml5.com/tag/adobe" class="tag-link-82" title="4 个话题" style="font-size: 8.89796pt;">Adobe</a>		</div>
+	</li>
+	
+	
+	<li id="rc_comments" class="widget">
+		<h3 class="widget-title">评论</h3>
+		<ul style="cursor: auto; opacity: 1;" id="wp-rc-reply"><li id="rc_com_4574" class="rc_comment"><div class="rc_avatar"><img alt="" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/7e795755fe8a817981c3a81620faf359.png" class="avatar avatar-32 photo" height="32" width="32"></div><div class="rc_author"><a id="rc_author_4574" href="http://www.mhtml5.com/2011/09/2920.html/comment-page-6#comment-4574">royguo</a></div><div class="rc_excerpt">1、B
+2、A
+3、A
+4、A
+5、A
+6、B
+7、期待官方...<span class="rc_more"><a href="javascript:;" class="rc_more_btn">»</a><a href="javascript:;" class="rc_reply_btn">@</a></span></div></li><li id="rc_com_4573" class="rc_comment"><div class="rc_avatar"><img alt="" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/c14c7d063e502bcd88cccc0bbf7ce243.png" class="avatar avatar-32 photo" height="32" width="32"></div><div class="rc_author"><a id="rc_author_4573" href="http://www.mhtml5.com/2011/09/2920.html/comment-page-6#comment-4573">黄华锐</a></div><div class="rc_excerpt">1: B (搜索引擎)
+2: ABC (了解HTML5资讯,...<span class="rc_more"><a href="javascript:;" class="rc_more_btn">»</a><a href="javascript:;" class="rc_reply_btn">@</a></span></div></li><li id="rc_com_4569" class="rc_comment"><div class="rc_avatar"><img alt="" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/5dfe88d089b4fc2737279aab795a2b32.png" class="avatar avatar-32 photo" height="32" width="32"></div><div class="rc_author"><a id="rc_author_4569" href="http://www.mhtml5.com/2011/09/2975.html/comment-page-1#comment-4569">youngershen</a></div><div class="rc_excerpt">99美元，谁买了拿出来看看<span class="rc_more"><a href="javascript:;" class="rc_more_btn">»</a><a href="javascript:;" class="rc_reply_btn">@</a></span></div></li><li id="rc_com_4568" class="rc_comment"><div class="rc_avatar"><img alt="" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/1.gif" class="avatar avatar-32" height="32" width="32"></div><div class="rc_author"><a id="rc_author_4568" href="http://www.mhtml5.com/2011/09/2920.html/comment-page-6#comment-4568">Alex171_5nu</a></div><div class="rc_excerpt">1、B
+2、B
+3、A
+4、A
+5、B
+6、B
+7、多些游戏...<span class="rc_more"><a href="javascript:;" class="rc_more_btn">»</a><a href="javascript:;" class="rc_reply_btn">@</a></span></div></li><li id="rc_com_4566" class="rc_comment"><div class="rc_avatar"><img alt="" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/b2d7d2d13aed54c2ed7feb538b382b42.png" class="avatar avatar-32 photo" height="32" width="32"></div><div class="rc_author"><a id="rc_author_4566" href="http://www.mhtml5.com/2011/09/3014.html/comment-page-1#comment-4566">Jack</a></div><div class="rc_excerpt">这种，真的没有兴趣<span class="rc_more"><a href="javascript:;" class="rc_more_btn">»</a><a href="javascript:;" class="rc_reply_btn">@</a></span></div></li><li id="rc_nav" class="rc_comment"><div id="rc_refresh" class="rc_newer"><a href="javascript:;">«刷新»</a></div><div id="rc_older" class="rc_older"><a href="javascript:;">下一页»</a></div></li></ul><div class="fixed"></div>	</li>
+	
+		
+	<li id="wp-admin" class="widget">
+		<h3 class="widget-title">管理</h3>
+		<ul>			<li><a href="http://www.mhtml5.com/register">注册</a></li>
+						<li><a href="http://www.mhtml5.com/wp-login.php">登录</a></li>	
+		</ul>
+	</li>
+			</ul>
+		</div><!-- #primary .widget-area -->
+	<div class="clear"></div>
+	</div><!-- #main -->
+
+	<div id="footer" role="contentinfo">
+		<div id="colophon">
+
+
+			<div id="site-info">
+				<p>
+						<img style="border: 0pt none; width: 88px; height: 31px;" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/vcss-blue.gif" alt="Valid CSS!">
+				</p>
+				<a href="http://www.mhtml5.com/" title="HTML5研究小组" rel="home">
+					Copyright © 2011 HTML5研究小组				</a>
+			</div><!-- #site-info -->
+
+			<div id="site-generator">
+								<a href="http://wordpress.org/" title="Semantic Personal Publishing Platform" rel="generator">
+					Proudly powered by WordPress.				</a>
+				<a href="http://www.qiqiboy.com/" title="QiQiBoY制作主题" rel="generator">
+					Theme by QiQiBoY.				</a>
+			</div><!-- #site-generator -->
+
+		</div><!-- #colophon -->
+	</div><!-- #footer -->
+</div>
+</div><!-- #wrapper -->
+<script type="text/javascript">
+	window.opt={
+		themeDir : 'http://www.mhtml5.com/wp-content/themes/windPaled',
+		dir: 'http://www.mhtml5.com'
+	}
+</script>
+<script src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/base.js"></script><style type="text/css">#site-description{text-shadow:0px 2px 2px #eee;}</style>
+	<script type="text/javascript" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/jia.js" charset="utf-8"></script>
+<script type="text/javascript" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/jquery.js"></script>
+<script type="text/javascript" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/scripts.js"></script>
+<script type="text/javascript" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/wp-ajax-recent-posts.js"></script><link rel="stylesheet" href="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/wp-rc-reply.css" type="text/css" media="screen"><script type="text/javascript" src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/wp-rc-reply-min.js"></script><div style="display:none">
+<script src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/stat.html" type="text/javascript"></script><a href="http://www.cnzz.com/stat/website.php?web_id=2844461" target="_blank" title="站长统计">站长统计</a><img src="%E4%B8%80%E6%AD%A5%E4%B8%80%E6%AD%A5%E5%AD%A6%E5%81%9A%E6%B8%B8%E6%88%8F-%E7%AC%AC%E4%BA%94%E5%9B%9E%EF%BC%9A%E7%86%8A%E7%A2%B0%E6%92%9E%E8%98%91%E8%8F%87%E5%A4%84%E7%90%86_files/stat.gif" border="0" height="0" width="0">
+</div>
+
+
+</body></html>

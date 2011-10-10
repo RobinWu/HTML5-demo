@@ -1,0 +1,120 @@
+/* You can modify the appearance of the form here. In later versions you will
+   be able to modify this from within Wordpress and possible chose from a 
+   number of defaults. */
+
+.tdomf_form {
+	padding:20px;
+}
+#content-text-ta{
+	width:500px;
+}
+.tdomf_form fieldset {
+ border: 0px;
+}
+.tdomf_form label {
+ }
+.tdomf_form .required {
+ font-weight: bold;
+}
+.tdomf_form fieldset {
+ text-align: left;
+ width: 100%;
+ padding-top: 5px;
+ padding-bottom: 5px;
+}
+.tdomf_form fieldset legend {
+  font-weight: bold;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  margin-left: 0px;
+}
+.tdomf_form_preview {
+ border: 1px dotted black;
+ padding: 5px;
+ margin: 5px;
+ margin-bottom: 20px;
+}
+.tdomf_form_preview p {
+ margin-left: 15px;
+}
+.tdomf_form_message {
+ padding: 5px;
+ margin: 5px;
+ margin-bottom: 20px;
+ text-align: left;
+}
+#tdomf_upload_inline_form {
+ text-align: left;
+ background-color: white;
+ width: 100%;
+ height: 100%;
+}
+#tdomf_upload_inline_form .required {
+ font-weight: bold;
+}
+.tdomf_upload_inline_errors {
+ color: red;
+}
+
+ul.tdomf_category_checklist, ul.tdomf_category_children {
+ list-style-type: none; 
+}
+
+.tdomf_buttons {
+  text-align: left;
+}
+.tdomf_buttons td {
+ width: 10px;
+}
+
+/* Formatting the QuickTag toolbar */
+
+#ed_toolbar input {
+ /*padding: 0px;
+ margin: 2px;
+ margin-bottom: 0px;
+ margin-top: 10px;*/
+}
+#ed_toolbar input:hover {
+ /*padding: 0px;*/
+}
+#ed_bold {
+ font-weight:bold;
+}
+#ed_italic {
+ font-style:italic;
+}
+#ed_link, #ed_ext_link {
+ color:blue;
+ text-decoration: underline;
+}
+#ed_under {
+ text-decoration: underline;
+}
+#ed_strike {
+ text-decoration: line-through;
+}
+
+/* Required for AJAX progress display */
+
+.tdomf_shadow {
+    background: black;
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+.progress {
+    position: absolute;
+    display: block;
+    background: #f9fcfe;
+    padding: 5px;
+}
+
