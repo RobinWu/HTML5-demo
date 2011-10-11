@@ -610,4 +610,3 @@ Mushroom.prototype.wobble = false;
 Mushroom.prototype.startBoing = null;
 Mushroom.prototype.lastBoing = null;
 Mushroom.prototype.squashedImg = null;
-
