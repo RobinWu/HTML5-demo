@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript" src="levels.js" type="text/javascript"></script>
+<script language="javascript" src="ptank_min.js" type="text/javascript"></script>
+<title>Battle City Clone</title>
+<style>
+    body{
+        text-align: center;
+        background: #999;
+    }
+    canvas{
+        margin: auto;
+        border : solid 1px #000;
+        background: #dfdfdf;
+    }
+</style>
+</head>
+
+<body>
+<h1>Clone Battle City For HTML5 (0.2)</h1>
+<p><a href="ptank.0.2.rar">下载游戏</a> | <a href="ptankMapEditor/ptankMapEditor.html">地图编辑器</a></p>
+<p>按键设置: wsad+jk， 或者方向键+空格。enter键开始游戏。m键切换音效开关。</p>
+<p>请使用最新的FireFox，Opera，Chrome或Safari进行游戏。建议Opera。</p>
+<p>最后，祝你玩的愉快！</p>
+<script language="javascript">
+    var canvas =document.createElement('canvas');
+	document.body.appendChild(canvas);
+	gc = new GCanvas(canvas);
+	gc.setSize(300,340);
+    
+    gload.loadImgs(preLoadImgs, function(objs){
+        Object.merge(pimgs,objs);
+		
+		var ctx = gc.getCtx();
+        ctx.font = '18px Verdana';
+		ctx.drawImage(pimgs['logo'], 0, 0);
+        loadResource(initGame);
+	});
+</script>
+</body>
+</html>
