@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>RIAidea &#8211; Focus on Flash/Flex/AIR  </title>
+<meta name="generator" content="WordPress 2.9.2" /> <!-- leave this for stats -->
+<link rel="stylesheet" href="http://www.riaidea.com/blog/wp-content/themes/statement/style.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="http://www.riaidea.com/blog/wp-content/themes/statement/tab.css" type="text/css" media="screen" />
+<script type="text/javascript" src="http://www.riaidea.com/blog/wp-content/themes/statement/tabber.js"></script>
+<link rel="alternate" type="application/rss+xml" title="RIAidea &#8211; Focus on Flash/Flex/AIR RSS Feed" href="http://www.riaidea.com/blog/feed" />
+<link rel="pingback" href="http://www.riaidea.com/blog/xmlrpc.php" />
+<script type="text/javascript">
+document.write('<style type="text/css">.tabber{display:none;}<\/style>');
+</script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.riaidea.com/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.riaidea.com/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='RIAidea - Focus on Flash/Flex/AIR' href='http://www.riaidea.com/blog' />
+<meta name="generator" content="WordPress 2.9.2" />
+<link rel="stylesheet" href="http://www.riaidea.com/blog/wp-content/plugins/coolcode/coolcode.css" />
+<script type="text/javascript" src="http://www.riaidea.com/blog/wp-content/plugins/coolcode/coolcode.js"></script>
+</head>
+<body>
+<div id="wrapper">
+
+<div id="header">
+
+<div class="wrap">
+<div id="title-area">
+</div>
+<div class="nav-area">
+<ul class="nav">
+<li class="">
+<a href="http://www.riaidea.com/blog">Home</a>
+</li>
+<li class="page_item page-item-2"><a href="http://www.riaidea.com/blog/about" title="About Me">About Me</a></li>
+<li><a title="projects" href="http://code.google.com/p/riaidea/" target="_blank">Projects</a></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<div id="frame">
+<div id="infobar">
+<div id="browse">
+Browse > <a href="http://www.riaidea.com/blog" title="Browse to: Home">Home</a> > 
+	
+</div>
+<div id="rss">
+<p><script src="http://www.riaidea.com/blog/wp-content/themes/statement/date.js" type="text/javascript"></script> | Subcribe via <a href="http://www.riaidea.com/blog/feed" title="RSS"><strong>RSS</strong></a></p>
+</div>
+</div>
+<div id="content">
+<div id="left">
+
+	
+		<h2 class="center">Not Found</h2>
+		<p class="center">Sorry, but you are looking for something that isn't here.</p>
+		<form method="get" id="searchform" action="http://www.riaidea.com/blog/">
+<div><input type="text" value="" name="s" id="s" />
+<input type="submit" id="searchsubmit" value="Search" />
+</div>
+</form>
+
+	
+	</div>
+
+<div id="right">
+
+
+<div class="widget">
+  <h4>最近文章</h4>	
+  <ul>	<li><a href='http://www.riaidea.com/blog/archives/389.html' title='HTML5版2D扫雷'>HTML5版2D扫雷</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/378.html' title='HTML5版头像上传组件'>HTML5版头像上传组件</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/371.html' title='HTML5 Canvas版的斗地主'>HTML5 Canvas版的斗地主</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/358.html' title='Javascript同源策略对context.getImageData的影响'>Javascript同源策略对context.getImageData的影响</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/331.html' title='HTML5 Canvas开发框架：CasualJS Framework'>HTML5 Canvas开发框架：CasualJS Framework</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/316.html' title='HTML5尝鲜：用HTML5 Canvas开发的游戏Demo &#8211; Field Runner'>HTML5尝鲜：用HTML5 Canvas开发的游戏Demo &#8211; Field Runner</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/302.html' title='Flash资源共享库打包工具Swift 1.0发布'>Flash资源共享库打包工具Swift 1.0发布</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/295.html' title='FP9下的图文混编组件RichTextField 2.0'>FP9下的图文混编组件RichTextField 2.0</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/279.html' title='另类Flash程序中PNG图片素材瘦身方法'>另类Flash程序中PNG图片素材瘦身方法</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/273.html' title='周期定时器：一个Flash Player10.1中不得不关注的特性'>周期定时器：一个Flash Player10.1中不得不关注的特性</a></li>
+</ul>
+</div>
+
+<div class="widget">
+  <h4>功能</h4>
+    <li><a href="http://www.riaidea.com/blog/wp-login.php">登录</a></li>
+  </div>
+
+
+
+<div class="widget">
+<h4>分类目录</h4>
+<ul>	<li class="cat-item cat-item-9"><a href="http://www.riaidea.com/blog/archives/category/adobe-air" title="查看 Adobe AIR 下的所有文章">Adobe AIR</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="http://www.riaidea.com/blog/archives/category/design-pattern" title="查看 Design Pattern 下的所有文章">Design Pattern</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://www.riaidea.com/blog/archives/category/flash-cs3as3" title="查看 Flash CS3/AS3 下的所有文章">Flash CS3/AS3</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://www.riaidea.com/blog/archives/category/flash8as2" title="查看 Flash8/AS2 下的所有文章">Flash8/AS2</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://www.riaidea.com/blog/archives/category/flex3" title="查看 Flex3 下的所有文章">Flex3</a>
+</li>
+	<li class="cat-item cat-item-23"><a href="http://www.riaidea.com/blog/archives/category/flex4gumbo" title="查看 Flex4(Gumbo) 下的所有文章">Flex4(Gumbo)</a>
+</li>
+	<li class="cat-item cat-item-26"><a href="http://www.riaidea.com/blog/archives/category/html5" title="查看 HTML5 下的所有文章">HTML5</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://www.riaidea.com/blog/archives/category/javascript" title="查看 Javascript 下的所有文章">Javascript</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://www.riaidea.com/blog/archives/category/news" title="查看 News 下的所有文章">News</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://www.riaidea.com/blog/archives/category/silverlight" title="查看 Silverlight 下的所有文章">Silverlight</a>
+</li>
+</ul>
+</div>
+
+<div class="widget">
+<h4>文章索引模板</h4>
+<ul>	<li><a href='http://www.riaidea.com/blog/archives/date/2011/07' title='2011年七月'>2011年七月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2011/04' title='2011年四月'>2011年四月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2011/03' title='2011年三月'>2011年三月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2011/01' title='2011年一月'>2011年一月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2010/12' title='2010年十二月'>2010年十二月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2010/08' title='2010年八月'>2010年八月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2010/06' title='2010年六月'>2010年六月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2010/05' title='2010年五月'>2010年五月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2010/04' title='2010年四月'>2010年四月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2010/03' title='2010年三月'>2010年三月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2009/06' title='2009年六月'>2009年六月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2009/05' title='2009年五月'>2009年五月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2009/04' title='2009年四月'>2009年四月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2009/03' title='2009年三月'>2009年三月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2009/02' title='2009年二月'>2009年二月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2009/01' title='2009年一月'>2009年一月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2008/11' title='2008年十一月'>2008年十一月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2008/09' title='2008年九月'>2008年九月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2008/08' title='2008年八月'>2008年八月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2008/06' title='2008年六月'>2008年六月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2008/05' title='2008年五月'>2008年五月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2008/04' title='2008年四月'>2008年四月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2008/03' title='2008年三月'>2008年三月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2008/02' title='2008年二月'>2008年二月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2008/01' title='2008年一月'>2008年一月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2007/11' title='2007年十一月'>2007年十一月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2007/08' title='2007年八月'>2007年八月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2007/07' title='2007年七月'>2007年七月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2007/06' title='2007年六月'>2007年六月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2007/05' title='2007年五月'>2007年五月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2007/03' title='2007年三月'>2007年三月</a></li>
+	<li><a href='http://www.riaidea.com/blog/archives/date/2007/01' title='2007年一月'>2007年一月</a></li>
+</ul>
+</div>
+
+<div class="widget">
+<h4>链接</h4>
+<ul><li><a href="http://codex.wordpress.org/">Documentation</a></li>
+<li><a href="http://planet.wordpress.org/">WordPress Planet</a></li>
+<li><a href="http://wordpress.org/development/">Development Blog</a></li>
+<li><a href="http://wordpress.org/extend/ideas/">Suggest Ideas</a></li>
+<li><a href="http://wordpress.org/extend/plugins/">Plugins</a></li>
+<li><a href="http://wordpress.org/extend/themes/">Themes</a></li>
+<li><a href="http://wordpress.org/support/">Support Forum</a></li>
+</ul>
+</div>
+
+
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+</div>
+<div class="clear"></div>
+</div>
+<div id="footer">
+<div id="foo">
+<p>© Copyright 2008 RIAidea.com · All Rights Reserved · Powered by Flashlizi · 沪ICP备08002082号</p>
+<div class="clear"></div>
+</div>
+</div>
+</body>
+</html>

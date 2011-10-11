@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html><head>
+<meta name="author" content="flashlizi - www.riaidea.com">
+<meta name="Description" content="HTML5 canvas experiment">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Runner - HTML5 Canvas 塔防游戏</title>
+
+<style>
+body
+{
+	padding: 0;
+	margin: 0;
+	background-color: #000000;
+	font-size: 12px;
+}
+
+#main
+{
+	width: 1200px;
+}
+
+#textContainer
+{
+	font-family: sans-serif, verdana;
+	font-size: 12px;
+	color: #FFFFFF;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+</style>
+
+<script type="text/javascript" src="js/casual-0.js"></script>
+<script type="text/javascript" src="js/runner_format.js"></script>
+
+<script type="text/javascript">
+function startGame()
+{
+	if (!document.createElement('canvas').getContext)
+	{
+		alert("Sorry, your browser doesn't support canvas, please use Firefox3.6+, Safari5+, Chrome10+, IE9+ etc.");
+		return;
+	} 
+	
+	//align center
+	var canvas = document.getElementById("canvas");
+	var bw = window.innerWidth || document.body.offsetWidth;
+	var bh = window.innerHeight || document.body.offsetHeight;
+	var left = (bw - canvas.width) >> 1;
+	var top = (bh - canvas.height) >> 1;
+	document.body.style.marginLeft = left + "px";
+	document.body.style.marginTop = top + "px";
+
+	//start game
+	Runner.startup();
+}
+</script>
+
+</head>
+
+<body style="margin-left: 40px; margin-top: 56px;" onload="startGame();">	
+	<div id="main" style="background-color: rgb(102, 102, 102); background-image: url(&quot;http://www.riaidea.com/html5/runner/images/grasslands_grid_s.png&quot;);">
+		<div id="canvasContainer">
+			<canvas id="canvas" width="1200" height="580"></canvas>
+		</div>  
+		<div id="textContainer">
+			<span id="status">FPS: 0.0</span>
+		</div>
+	</div>	
+
+
+
+</body></html>
