@@ -1,0 +1,90 @@
+<html>
+
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=9" />
+<meta name="Author" content="flashlizi - www.riaidea.com">
+<meta name="Keywords" content="HTML5,canvas,casual framework">
+<meta name="Description" content="HTML5 canvas experiment">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>疯狂的小鸟Demo - HTML5 Canvas版</title>
+
+<style>
+body
+{
+	padding: 0;
+	margin: 0;	
+	height: 100%;
+	background-color: #eee;
+	font-size: 12px;
+}
+
+#main
+{
+	margin: 0 auto;
+	width: 1008px;
+}
+
+#textContainer
+{
+	margin: 0 auto;
+	font: 24px arial, verdana;
+	font-weight: bold;
+	color: #333;
+	position: absolute;
+	top: 200px;
+	left: 450px;
+	text-align: center;
+    text-shadow: 0 2px 2px #ccc;
+}
+
+</style>
+
+
+<script type="text/javascript" src="src/casual-0.1.min.js"></script>
+<script type="text/javascript" src="src/ImageLoader.js"></script>
+<script type="text/javascript" src="src/Bird.js"></script>
+<script type="text/javascript" src="src/Pig.js"></script>
+<script type="text/javascript" src="src/angrybirds.js"></script>
+
+<script type="text/javascript">
+function startGame()
+{
+	if (!document.createElement('canvas').getContext)
+	{
+		alert("Sorry, your browser doesn't support canvas, please use Firefox3.6+, Safari5+, Chrome, IE9 etc.");
+		return;
+	}
+	
+	//adjust canvas
+	var bw = window.innerWidth || document.body.offsetWidth;
+	var bh = window.innerHeight || document.body.offsetHeight;
+	var canvas = document.getElementById("canvas");
+	var body = document.body;
+	//full screen
+	canvas.width = bw;
+	canvas.height = bh - 20;
+	document.getElementById("main").style.width = bw + "px";
+	
+	var txt = document.getElementById("textContainer");
+	txt.style.left = (bw - txt.offsetWidth >> 1) + "px";
+
+	//start game
+	game.startup();
+}
+</script>
+
+</head>
+
+<body onLoad="startGame();">	
+	<div id="main">
+		<div id="canvasContainer">
+			<canvas id="canvas">Sorry, your browser doesn't support canvas, please use Firefox3.6+, Safari5+, Chrome, IE9 etc.</canvas>
+		</div>  
+		<div id="textContainer">
+			<span id="status">Loading resources, please wait...</span>
+		</div>
+		<span><input type="checkbox" checked="true" onclick="this.checked ? game.bgSound.play() : game.bgSound.stop();" />Enable Sound</span>
+	</div>
+</body>
+
+</html>

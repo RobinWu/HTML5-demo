@@ -1,0 +1,1 @@
+java -jar e:/dev/js/compiler.jar --js_output_file src/angrybirds.min.js --js src/ImageLoader.js --js src/Bird.js --js src/Pig.js --js src/angrybirds.js
