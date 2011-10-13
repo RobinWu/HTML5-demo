@@ -1,0 +1,129 @@
+body {
+	font:bold 12px Helvetica, Arial, sans-serif;
+	background: #333;
+	color: #fff;
+}
+
+#promo a {
+  color: #A8DC65;
+  text-decoration: none;
+}
+
+#promo a:hover {
+  text-decoration: underline;
+}
+
+}
+#notifierBox {
+	font-family: 'Old Standard TT', Helvetica, Arial, sans-serif;
+	text-shadow: #fff 0px 0px 1px;
+}
+
+#container {
+	width: 804px;
+	margin: 0 auto;
+	position: relative;
+}
+
+h1 {
+	font-family: 'Old Standard TT', Helvetica, Arial, sans-serif;
+	margin: 0 auto;;
+	font-size: 72px;
+	color: #fff;
+	text-align: center;
+}
+
+#ballField {
+	width: 800px; /*make sure these match xmax and ymax in chainrxn.js, GameLevel object*/
+	height: 600px;
+	background: url('game.png') repeat;
+	margin: 0 auto;
+}
+
+#notifierBox {
+	width: 400px;
+	position: absolute;
+	z-index: 50;
+	top: 50%;
+	left: 50%;
+	margin: -100px 0 0 -200px;
+	background: #555;
+	border: 3px solid #fff;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-webkit-box-shadow: 5px 5px 5px #333;
+}
+
+#notifierTitle {
+	margin-top: 6px;
+	font-size: 26px;
+	text-align: center;
+}
+
+#notifierButton {
+	margin: 10px;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+	background: #a8dc65;
+	text-align: center;
+	cursor: pointer;
+	padding: 7px 0;
+	font-size: 18px;
+	color: #297a22;
+	border: 1px solid #297a22;
+	-webkit-box-shadow: 3px 3px 3px #333;
+}
+
+#starterBall{
+  width:194px;
+  height:194px;
+  position:absolute;
+  padding:0px;
+  background: url("pointerball.png");
+}
+
+#ballsExpanded, #levelScore, #totalScore, #levelNumber{
+  padding: 5px;
+  position: absolute;
+}
+
+#ballsExpanded{
+  left: 70px;
+  top: 0px;
+}
+
+#levelNumber{
+  left: 70px;
+  top: 15px;
+}
+
+#levelScore{
+  right: 0px;
+  bottom: 0px;
+}
+#totalScore{
+  left: 0px;
+  bottom: 0px;
+}
+
+
+.points{
+  font-size: 15px;
+  text-align:center;
+  color:#fff;
+  width:50px;
+  height:20px;
+}
+
+.supported a{
+	color: #fff;
+}
+
+.supported {
+  display: block;
+  width: 100%;
+  font-size: 90%;
+  text-align:center;
+}

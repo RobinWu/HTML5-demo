@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Old Standard TT';
+  font-style: normal;
+  font-weight: normal;
+  /*src: local('Old Standard TT Regular'), local('OldStandardTT-Regular'), url('http://themes.googleusercontent.com/static/fonts/oldstandardtt/v2/n6RTCDcIPWSE8UNBa4k-DAjWwMcLosnYS7_elQHKBmA.woff') format('woff');*/
+}
