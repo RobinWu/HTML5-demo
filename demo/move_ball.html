@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <canvas id="myCanvas" width="400" height="320" style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+        <br/>
+        <input type="button" value="加速(+)" onclick="speed += 1" />
+        <input type="button" value="减速(-)" onclick="speed -= 1" />
+        <input type="button" value="加球" onclick="addBall()" />
+
+
+        <script type="text/javascript">
+            var ctx = document.getElementById("myCanvas").getContext("2d");
+            var screenWidth = ctx.canvas.width;
+            var screenHeight = ctx.canvas.height;
+            var speed = 2;
+            var ball_count = 0;
+            var balls = new Array();
+
+            function GameObject() {};
+            GameObject.prototype.x = 0;
+            GameObject.prototype.y = 0;
+
+            function Ball() {};
+            Ball.prototype = new GameObject();
+            Ball.prototype.color = "#FF0000";
+            Ball.prototype.size = 10;
+            Ball.prototype.horizontalSpeed = speed;
+            Ball.prototype.verticalSpeed = speed;
+            balls[ball_count] = new Ball();
+
+            function randColor() {
+                return "rgb("+Math.round(255*Math.random())+", "+Math.round(255*Math.random())+", "+Math.round(255*Math.random())+")";
+            }
+
+            function addBall() {
+                ball_count += 1;
+                ball = new Ball();
+                ball.color = randColor();
+                balls[ball_count] = ball;
+            }
+
+            function hasBallHitEdge() {
+                for(var i = 0; i < balls.length; i++) {
+                    ball = balls[i];
+
+                    if(ball.horizontalSpeed > 0) {
+                        ball.horizontalSpeed = speed;
+                    } else {
+                        ball.horizontalSpeed = -speed;
+                    }
+                    if(ball.verticalSpeed > 0) {
+                        ball.verticalSpeed = speed;
+                    } else {
+                        ball.verticalSpeed = -speed;
+                    }
+
+                    ball.x = ball.x + ball.horizontalSpeed;
+                    ball.y = ball.y + ball.verticalSpeed;
+                    // top border
+                    if(ball.y <= 0) ball.verticalSpeed = -ball.verticalSpeed;
+                    // right border
+                    if(ball.x + ball.size * 2 >= screenWidth) ball.horizontalSpeed = -ball.horizontalSpeed;
+                    // bottom border
+                    if(ball.y + ball.size * 2 >= screenHeight) ball.verticalSpeed = -ball.verticalSpeed;
+                    // left border
+                    if(ball.x <= 0) ball.horizontalSpeed = -ball.horizontalSpeed;
+                }
+            }
+
+            function gameLoop() {
+                ctx.clearRect(0, 0, screenWidth, screenHeight);
+                ctx.save();
+
+                for(var i = 0; i < balls.length; i++) {
+                    ball = balls[i];
+
+                    ctx.fillStyle=ball.color;
+                    ctx.beginPath();
+                    ctx.arc(ball.x + ball.size + ball.horizontalSpeed, ball.y + ball.size + ball.verticalSpeed, ball.size, 0, Math.PI*2, true);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+
+                ctx.restore();
+
+                hasBallHitEdge();
+            }
+
+            setInterval(gameLoop, 10);
+        </script>
+    </body>
+</html>
