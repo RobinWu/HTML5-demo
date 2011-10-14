@@ -9,10 +9,13 @@
             //<![CDATA[
         var backgroundForestImg = new Image(),
         mushroomImg = new Image(),
+        bearEyesCloseImg = new Image(),
+        flowerImg = new Image(),
+        leafImg = new Image(),
+        acornImg = new Image(),
         ctx,
         screenWidth,
         screenHeight,
-        bearEyesCloseImg = new Image(),
         speed = 2,
         horizontalSpeed = speed, //水平速度
         verticalSpeed = -speed, //垂直速度
@@ -32,6 +35,12 @@ function Animal() {};
 Animal.prototype = new GameObject();
 Animal.prototype.angle = 0;
 var animal = new Animal();
+
+var prizes = new Array();
+function Prize() {};
+Prize.prototype = new GameObject();
+Prize.prototype.row = 0;
+Prize.prototype.col = 0;
 
 //方法用途：检测2个物体是否碰撞   
 //参数object1：物体1   
@@ -97,7 +106,7 @@ function hasAnimalHitEdge() {
     }
 }
 
-function HasAnimalHitMushroom() {
+function hasAnimalHitMushroom() {
     if(checkIntersect(animal, mushroom, 5)) {
         // 假如碰撞的位置属于蘑菇的左下位置, 反弹
         if((animal.x + animal.image.width/2) < (mushroom.x + mushroom.image.width * 0.25)) {
@@ -124,6 +133,10 @@ function gameLoop() {
     ctx.drawImage(backgroundForestImg, 0, 0);
 
     ctx.drawImage(mushroom.image, mushroom.x, mushroom.y);
+
+    for(var x = 0; x < prizes.length; x++) {
+        ctx.drawImage(prizes[x].image, prizes[x].x, prizes[x].y);
+    }
 
     animal.x += horizontalSpeed;
     animal.y += verticalSpeed;
@@ -162,8 +175,32 @@ function init(){
     animal.x = parseInt(screenWidth/2);
     animal.y = parseInt(screenHeight/2);
 
-    setInterval(gameLoop, 10);
+    // init prizes
+    flowerImg.src = 'images/flower.png';
+    leafImg.src = 'images/leaf.png';
+    acornImg.src = 'images/acorn.png';
+
+    var count = 0;
+    for(var x = 0; x < 3; x++) {
+        for(var y = 0; y < 23; y++) {
+            prize = new Prize();
+            if(x == 0) prize.image = flowerImg;
+            if(x == 1) prize.image = acornImg;
+            if(x == 2) prize.image = leafImg;
+            prize.row = x;
+            prize.col = y;
+            prize.x = 20 * prize.col + 10;
+            prize.y = 30 * prize.row + 20;
+
+            prizes[count] = prize;
+            count++;
+        }
+    }
+
     AddEventHandlers();
+
+    // start game
+    setInterval(gameLoop, 10);
 }
 
 $(window).ready(function(){ 
