@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>HTML5 mushroom and bear</title>
+
+        <script type="text/javascript" src="js/jquery-1.6.min.js" charset="utf-8"></script>
+        <script type="text/javascript" language="javascript" charset="utf-8">
+            //<![CDATA[
+        var backgroundForestImg = new Image(),
+        mushroomImg = new Image(),
+        ctx,
+        screenWidth,
+        screenHeight,
+        bearEyesCloseImg = new Image(),
+        speed = 2,
+        horizontalSpeed = speed, //水平速度
+        verticalSpeed = -speed, //垂直速度
+        bearAngle = 2; //熊旋转的速度
+
+
+function GameObject() {
+    this.x = 0;
+    this.y = 0;
+    this.image = null;
+}
+function Mushroom(){};
+Mushroom.prototype = new GameObject();
+var mushroom = new Mushroom();
+
+function Animal() {};
+Animal.prototype = new GameObject();
+Animal.prototype.angle = 0;
+var animal = new Animal();
+
+//方法用途：检测2个物体是否碰撞   
+//参数object1：物体1   
+//参数object2：物体2   
+//参数overlap：可重叠的区域值   
+//返回布尔值：碰撞返回true，不碰撞返回false 
+function checkIntersect(object1, object2, overlap) {
+    //    x-Axis                      x-Axis
+    //  A1------>B1 C1              A2------>B2 C2
+    //  +--------+   ^              +--------+   ^ 
+    //  | object1|   | y-Axis       | object2|   | y-Axis
+    //  |        |   |              |        |   |
+    //  +--------+  D1              +--------+  D2
+    //
+
+    A1 = object1.x + overlap;
+    B1 = object1.x + object1.image.width - overlap;
+    C1 = object1.y + overlap; 
+    D1 = object1.y + object1.image.height - overlap;
+
+    A2 = object2.x + overlap;
+    B2 = object2.x + object2.image.width - overlap;
+    C2 = object2.y + overlap;
+    D2 = object2.y + object2.image.width - overlap;
+
+    //Do they overlap on the x-Axis X轴重叠
+    if(A1 > A2 && A1 < B2 || B1 > A2 && B1 < B2) {
+        //x axis intersects so check y axis Y轴重叠
+        if(C1 > C2 && C1 < D2 || D1 > C2 && D1 < D2) {
+            //overlap
+            return true;
+        }
+    }
+    //as you were
+    return false;
+}
+
+function hasAnimalHitEdge() {
+    //熊碰到右边边界
+    if(animal.x > screenWidth - animal.image.width) {
+        if(horizontalSpeed > 0)//假如向右移动
+            horizontalSpeed = -horizontalSpeed;//改变水平速度方向
+    }
+    //熊碰到左边边界
+    if(animal.x<-10)   {
+        if(horizontalSpeed < 0)//假如向左移动
+            horizontalSpeed = -horizontalSpeed;//改变水平速度方向
+    }
+    //熊碰到下面边界   
+    if(animal.y > screenHeight - animal.image.height)   {
+        //2秒钟后从新开始   
+        setTimeout(function(){
+                horizontalSpeed = speed;
+                verticalSpeed = -speed;
+                animal.x = parseInt(screenWidth/2);
+                animal.y = parseInt(screenHeight/2);
+                gameLoop();
+            }, 2000);
+    }
+    //熊碰到上边边界
+    if(animal.y<0) {
+        verticalSpeed = -verticalSpeed;
+    }
+}
+
+function HasAnimalHitMushroom() {
+    if(checkIntersect(animal, mushroom, 5)) {
+        // 假如碰撞的位置属于蘑菇的左下位置, 反弹
+        if((animal.x + animal.image.width/2) < (mushroom.x + mushroom.image.width * 0.25)) {
+            horizontalSpeed = -speed;
+        }
+        // 假如碰撞的位置属于蘑菇的左上位置, 反弹速度减半
+        else if((animal.x + animal.image.width/2) < (mushroom.x + mushroom.image.width*0.5)) {
+            horizontalSpeed = -speed/2;
+        }
+        // 假如碰撞的位置属于蘑菇的上位置
+        else if((animal.x + animal.image.width/2) < (mushroom.x + mushroom.image.width*0.5)) {
+            horizontalSpeed = speed/2;
+        } else {
+            horizontalSpeed = speed;
+        }
+        verticalSpeed = -speed;
+    }
+}
+
+function gameLoop() {
+    ctx.clearRect(0, 0, screenWidth, screenHeight);
+    ctx.save();
+
+    ctx.drawImage(backgroundForestImg, 0, 0);
+
+    ctx.drawImage(mushroom.image, mushroom.x, mushroom.y);
+
+    animal.x += horizontalSpeed;
+    animal.y += verticalSpeed;
+    animal.angle += bearAngle;
+    ctx.translate(animal.x + (animal.image.width/2), animal.y + (animal.image.height/2));
+    ctx.rotate(animal.angle * Math.PI/180);
+    ctx.drawImage(animal.image, -(animal.image.width/2), -(animal.image.height/2));
+
+    ctx.restore();
+    hasAnimalHitEdge();
+    hasAnimalHitMushroom();
+}
+
+function AddEventHandlers() {
+    $('#container').mousemove(function(e) {
+            mushroom.x = e.pageX - (mushroom.image.width / 2);
+            });
+}
+
+function init(){
+    // init env
+    mushroomImg.src = 'images/mushroom.png';
+    backgroundForestImg.src = 'images/forest1.jpg';
+    ctx = document.getElementById('canvas').getContext('2d');
+    screenWidth = parseInt($("#canvas").attr('width'));
+    screenHeight = parseInt($('#canvas').attr('height'));
+
+    // init mushroom
+    mushroom.image = mushroomImg;
+    mushroom.x = parseInt(screenWidth/2);
+    mushroom.y = screenHeight - 40;
+
+    // init bear
+    bearEyesCloseImg.src = 'images/bear_eyesclosed.png';
+    animal.image = bearEyesCloseImg;
+    animal.x = parseInt(screenWidth/2);
+    animal.y = parseInt(screenHeight/2);
+
+    setInterval(gameLoop, 10);
+    AddEventHandlers();
+}
+
+$(window).ready(function(){ 
+        init(); 
+        });
+//]]>
+</script>
+    </head>
+    <body>
+        <div id="container" style="border:1px solid; width:480px; height:320px;">
+
+            <canvas id="canvas" width="480" height="320">
+            Oh dear, your browser dosen't support HTML5! Tell you what, why don't you upgrade to a decent browser - you won't regret it!
+            </canvas>
+
+        </div>
+        <!--<img id="BtnImgStart" style="position: absolute; left: 200px; top: 200px; cursor: pointer; float: left;" src="images/START-Button.png">-->
+
+        <div style="clear:left;" id="fps">0 fps</div>
+        <input id="showHideBounds" value="show/hide bounds" type="button">
+    </body>
+</html>
