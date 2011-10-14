@@ -41,6 +41,7 @@ function Prize() {};
 Prize.prototype = new GameObject();
 Prize.prototype.row = 0;
 Prize.prototype.col = 0;
+Prize.prototype.hit = false;
 
 //方法用途：检测2个物体是否碰撞   
 //参数object1：物体1   
@@ -106,6 +107,18 @@ function hasAnimalHitEdge() {
     }
 }
 
+function hasAnimalHitPrize() {
+    for(var x = 0; x < prizes.length; x++) {
+        var prize = prizes[x];
+        if(!prize.hit) {
+            if(checkIntersect(prize, animal, 0)) {
+                prize.hit = true;
+                verticalSpeed = speed;
+            }
+        }
+    }
+}
+
 function hasAnimalHitMushroom() {
     if(checkIntersect(animal, mushroom, 5)) {
         // 假如碰撞的位置属于蘑菇的左下位置, 反弹
@@ -135,7 +148,9 @@ function gameLoop() {
     ctx.drawImage(mushroom.image, mushroom.x, mushroom.y);
 
     for(var x = 0; x < prizes.length; x++) {
-        ctx.drawImage(prizes[x].image, prizes[x].x, prizes[x].y);
+        if(!prizes[x].hit) {
+            ctx.drawImage(prizes[x].image, prizes[x].x, prizes[x].y);
+        }
     }
 
     animal.x += horizontalSpeed;
@@ -148,6 +163,7 @@ function gameLoop() {
     ctx.restore();
     hasAnimalHitEdge();
     hasAnimalHitMushroom();
+    hasAnimalHitPrize();
 }
 
 function AddEventHandlers() {
