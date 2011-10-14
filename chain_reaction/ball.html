@@ -1,9 +1,15 @@
 <!DOCTYPE HTML>
 <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
     <body>
         <canvas id="myCanvas" width="400" height="320" style="border:1px solid #c3c3c3;">
         Your browser does not support the canvas element.
         </canvas>
+        <br/>
+        <input type="button" value="加速(+)" onclick="speed += 1" />
+        <input type="button" value="减速(-)" onclick="speed -= 1" />
 
 
         <script type="text/javascript">
@@ -26,6 +32,17 @@
             ball = new Ball();
 
             function hasBallHitEdge() {
+                if(horizontalSpeed > 0) {
+                    horizontalSpeed = speed;
+                } else {
+                    horizontalSpeed = -speed;
+                }
+                if(verticalSpeed > 0) {
+                    verticalSpeed = speed;
+                } else {
+                    verticalSpeed = -speed;
+                }
+
                 ball.x = ball.x + horizontalSpeed;
                 ball.y = ball.y + verticalSpeed;
 
