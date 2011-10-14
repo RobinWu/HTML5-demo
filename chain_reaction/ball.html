@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+    <body>
+        <canvas id="myCanvas" width="400" height="320" style="border:1px solid #c3c3c3;">
+        Your browser does not support the canvas element.
+        </canvas>
+
+
+        <script type="text/javascript">
+            var ctx = document.getElementById("myCanvas").getContext("2d");
+            var screenWidth = ctx.canvas.width;
+            var screenHeight = ctx.canvas.height;
+            var speed = 2;
+            var horizontalSpeed = speed;
+            var verticalSpeed = speed;
+            var ball = null;
+
+            function GameObject() {};
+            GameObject.prototype.x = 0;
+            GameObject.prototype.y = 0;
+
+            function Ball() {};
+            Ball.prototype = new GameObject();
+            Ball.prototype.color = "#FF0000";
+            Ball.prototype.size = 10;
+            ball = new Ball();
+
+            function hasBallHitEdge() {
+                ball.x = ball.x + horizontalSpeed;
+                ball.y = ball.y + verticalSpeed;
+
+                // top
+                if(ball.y <= 0) verticalSpeed = -verticalSpeed;
+                // right
+                if(ball.x + ball.size * 2 >= screenWidth) horizontalSpeed = -horizontalSpeed;
+                // bottom
+                if(ball.y + ball.size * 2 >= screenHeight) verticalSpeed = -verticalSpeed;
+                // left
+                if(ball.x <= 0) horizontalSpeed = -horizontalSpeed;
+            }
+
+            function gameLoop() {
+                ctx.clearRect(0, 0, screenWidth, screenHeight);
+                ctx.save();
+
+                ctx.fillStyle=ball.color;
+                ctx.beginPath();
+                ctx.arc(ball.x + ball.size + horizontalSpeed, ball.y + ball.size + verticalSpeed, ball.size, 0, Math.PI*2, true);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.restore();
+
+                hasBallHitEdge();
+            }
+
+            setInterval(gameLoop, 10);
+        </script>
+    </body>
+</html>
