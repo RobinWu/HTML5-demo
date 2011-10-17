@@ -42,9 +42,9 @@ Ball = new Class({
     this.draw();
     var notHit = true;
     this.gameLevel.expandedBalls.each(function(expandedBall){
-      if(notHit&&this.gameLevel.movingBalls[expandedBall].expanded =  = true&&Math.sqrt(Math.pow(this.gameLevel.movingBalls[expandedBall].xposition-this.xposition,
+      if(notHit&&this.gameLevel.movingBalls[expandedBall].expanded == true&&Math.sqrt(Math.pow(this.gameLevel.movingBalls[expandedBall].xposition-this.xposition,
       2)+Math.pow(this.gameLevel.movingBalls[expandedBall].yposition-this.yposition,
-      2))< = this.radius+this.gameLevel.movingBalls[expandedBall].radius){
+      2))<= this.radius+this.gameLevel.movingBalls[expandedBall].radius){
         this.chainlevel = this.gameLevel.movingBalls[expandedBall].chainlevel+1;
         this.startExpansion();
         notHit = false;
@@ -288,29 +288,18 @@ $$("body")[0].addEvent("click",
     }.bind(this))
   },
   showWinBG : function(){
-    this.chainrxn.ballField.set("morph",
-    {
-      "duration" : 1000
-    });
-    this.chainrxn.ballField.morph({
-      "background-color" : "#525252"
-    })
+    this.chainrxn.ballField.set("morph", { "duration" : 1000 });
+    this.chainrxn.ballField.morph({ "background-color" : "#525252" })
   },
   doLoser : function(){
     this.repeater = $clear(this.repeater);
-    this.canvas.clearRect(0,
-    0,
-    this.xmax+this.ballSize,
-    this.ymax+this.ballSize);
+    this.canvas.clearRect(0, 0, this.xmax+this.ballSize, this.ymax+this.ballSize);
     this.chainrxn.repeatLevel();
   },
   doWinner : function(){
     this.repeater = $clear(this.repeater);
     (function(){
-      this.canvas.clearRect(0,
-      0,
-      this.xmax+this.ballSize,
-      this.ymax+this.ballSize);
+      this.canvas.clearRect(0, 0, this.xmax+this.ballSize, this.ymax+this.ballSize);
       this.chainrxn.doNextLevel(this.score);
     }).delay(this.expandDelay,
     this)
@@ -327,30 +316,7 @@ var ChainRxn = new Class({
   totalScoreEl : false,
   levelNumberEl : false,
   ballField : false,
-  levels : [[1,
-  5],
-  [2,
-  10],
-  [4,
-  15],
-  [6,
-  20],
-  [10,
-  25],
-  [15,
-  30],
-  [18,
-  35],
-  [22,
-  40],
-  [30,
-  45],
-  [37,
-  50],
-  [48,
-  55],
-  [55,
-  60]],
+  levels : [[1, 5], [2, 10], [4, 15], [6, 20], [10, 25], [15, 30], [18, 35], [22, 40], [30, 45], [37, 50], [48, 55], [55, 60]],
   levelNumber : 0,
   initialize : function(){
     this.notifierBox = $('notifierBox');
@@ -361,45 +327,28 @@ var ChainRxn = new Class({
     this.totalScoreEl = $('totalScore');
     this.levelNumberEl = $('levelNumber');
     this.ballField = $("ballField");
-    this.notifierButton.addEvent("click",
-    function(){
+    this.notifierButton.addEvent("click", function(){
       this.notifierButton.removeEvents();
       this.newGame();
     }.bind(this))
   },
   repeatLevel : function(){
-    this.notifierTitle.set("text",
-    "You lose!");
-    this.notifierButton.set("text",
-    "Try Again");
-    this.notifierBox.setStyle("display",
-    "");
-    this.notifierButton.addEvent("click",
-    function(){
-      this.newGame();
-    }.bind(this))
+    this.notifierTitle.set("text", "You lose!");
+    this.notifierButton.set("text", "Try Again");
+    this.notifierBox.setStyle("display", "");
+    this.notifierButton.addEvent("click", function(){ this.newGame(); }.bind(this))
   },
   doNextLevel : function(score){
     this.levelNumber++;
     this.score+ = score;
-    this.notifierTitle.set("text",
-    "You win! Total "+this.score+" points");
-    this.notifierBox.setStyle("display",
-    "");
+    this.notifierTitle.set("text", "You win! Total "+this.score+" points");
+    this.notifierBox.setStyle("display", "");
     if(this.levelNumber<this.levels.length){
-      this.notifierButton.set("text",
-      "Play Level "+(this.levelNumber+1));
-      this.notifierButton.addEvent("click",
-      function(){
-        this.newGame();
-      }.bind(this))
+      this.notifierButton.set("text", "Play Level "+(this.levelNumber+1));
+      this.notifierButton.addEvent("click", function(){ this.newGame(); }.bind(this))
     }else{
-      this.notifierButton.set("text",
-      "Play Again");
-      this.notifierButton.addEvent("click",
-      function(){
-        window.location = window.location;
-      })
+      this.notifierButton.set("text", "Play Again");
+      this.notifierButton.addEvent("click", function(){ window.location = window.location; })
     }
   },
   newGame : function(){
@@ -409,16 +358,12 @@ var ChainRxn = new Class({
     this.levelNumberEl.empty();
     this.notifierTitle.set("text",
     "Get "+this.levels[this.levelNumber][0]+" out of "+this.levels[this.levelNumber][1]+" balls!");
-    this.notifierButton.set('text',
-    "Play!");
+    this.notifierButton.set('text', "Play!");
     this.notifierButton.removeEvents();
-    this.notifierButton.addEvent("click",
-    function(){
-      this.notifierBox.setStyle("display",
-      "none");
+    this.notifierButton.addEvent("click", function(){
+      this.notifierBox.setStyle("display", "none");
       this.notifierButton.removeEvents();
-      this.game = new GameLevel(this.levels[this.levelNumber],
-      this);
+      this.game = new GameLevel(this.levels[this.levelNumber], this);
     }.bind(this))
   }
 })
