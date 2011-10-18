@@ -28,6 +28,7 @@
 
             function Ball() {};
             Ball.prototype = new GameObject();
+            Ball.prototype.id = null;
             Ball.prototype.color = "#FF0000";
             Ball.prototype.size = 10;
             Ball.prototype.horizontalSpeed = speed;
@@ -55,18 +56,20 @@
                 // left border
                 if(this.x <= 0) this.horizontalSpeed = -this.horizontalSpeed;
             }
-            balls[ball_count] = new Ball();
 
             function randColor() {
                 return "rgb("+Math.round(255*Math.random())+", "+Math.round(255*Math.random())+", "+Math.round(255*Math.random())+")";
             }
 
             function addBall() {
-                ball_count += 1;
                 ball = new Ball();
+                ball.id = ball_count;
                 ball.color = randColor();
                 balls[ball_count] = ball;
+
+                ball_count += 1;
             }
+            addBall();
 
             function gameLoop() {
                 ctx.clearRect(0, 0, screenWidth, screenHeight);
