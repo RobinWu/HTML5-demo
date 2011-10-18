@@ -55,7 +55,16 @@
                 if(this.y + this.size * 2 >= screenHeight) this.verticalSpeed = -this.verticalSpeed;
                 // left border
                 if(this.x <= 0) this.horizontalSpeed = -this.horizontalSpeed;
-            }
+            };
+            Ball.prototype.hitOtherBalls = function() {
+                for(var i = 0; i < balls.length; i++) {
+                    _ball = balls[i];
+                    // x^2 + y^2 = z^2
+                    if(this.id != _ball.id && Math.sqrt(Math.pow(_ball.x - this.x, 2) + Math.pow(_ball.y - this.y, 2)) <= (this.size + _ball.size)) {
+                        this.color = randColor();
+                    }
+                }
+            };
 
             function randColor() {
                 return "rgb("+Math.round(255*Math.random())+", "+Math.round(255*Math.random())+", "+Math.round(255*Math.random())+")";
@@ -85,6 +94,7 @@
                     ctx.fill();
 
                     ball.hitEdge();
+                    ball.hitOtherBalls();
                 }
 
                 ctx.restore();
