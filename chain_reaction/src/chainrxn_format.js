@@ -22,15 +22,11 @@ Ball = new Class({
       var direction = Math.random()*360;
       this.downspeed = Math.cos(direction)*this.gameLevel.ballSpeed;
       this.rightspeed = Math.sin(direction)*this.gameLevel.ballSpeed;
-      this.color = "rgb("+Math.round(255*Math.random())+",
-       "+Math.round(255*Math.random())+",
-       "+Math.round(255*Math.random())+")";
+      this.color = "rgb("+Math.round(255*Math.random())+", "+Math.round(255*Math.random())+", "+Math.round(255*Math.random())+")";
     }else{
       this.xposition = xposition;
       this.yposition = yposition;
-      this.color = "rgb(150,
-      150,
-      150)";
+      this.color = "rgb(150, 150, 150)";
       this.startExpansion();
     }
     this.gameLevel.movingBalls.push(this);
@@ -42,9 +38,11 @@ Ball = new Class({
     this.draw();
     var notHit = true;
     this.gameLevel.expandedBalls.each(function(expandedBall){
-      if(notHit&&this.gameLevel.movingBalls[expandedBall].expanded == true&&Math.sqrt(Math.pow(this.gameLevel.movingBalls[expandedBall].xposition-this.xposition,
-      2)+Math.pow(this.gameLevel.movingBalls[expandedBall].yposition-this.yposition,
-      2))<= this.radius+this.gameLevel.movingBalls[expandedBall].radius){
+      if(notHit&&this.gameLevel.movingBalls[expandedBall].expanded == true&&
+          Math.sqrt(
+              Math.pow(this.gameLevel.movingBalls[expandedBall].xposition-this.xposition, 2)+
+              Math.pow(this.gameLevel.movingBalls[expandedBall].yposition-this.yposition, 2)
+          ) <= this.radius+this.gameLevel.movingBalls[expandedBall].radius){
         this.chainlevel = this.gameLevel.movingBalls[expandedBall].chainlevel+1;
         this.startExpansion();
         notHit = false;
@@ -63,10 +61,8 @@ if(this.yposition< = this.gameLevel.ballSize||this.yposition> = this.gameLevel.y
     this.expanded = true;
     this.gameLevel.expandedBalls.push(this.number);
     this.gameLevel.totalBallsExpanded++;
-    this.gameLevel.chainrxn.ballsExpandedEl.set("text",
-    this.gameLevel.totalBallsExpanded+" balls expanded");
-    var newPoints = 100*Math.pow(this.chainlevel,
-    3);
+    this.gameLevel.chainrxn.ballsExpandedEl.set("text", this.gameLevel.totalBallsExpanded+" balls expanded");
+    var newPoints = 100*Math.pow(this.chainlevel, 3);
     this.gameLevel.score+ = newPoints;
     this.gameLevel.chainrxn.levelScoreEl.set("text",
     this.gameLevel.score+" level points");
@@ -86,10 +82,7 @@ if(this.yposition< = this.gameLevel.ballSize||this.yposition> = this.gameLevel.y
       return;
     }
 var coordinates = this.gameLevel.chainrxn.ballField.getCoordinates();
-    var pointBox = new Element("div",
-    {
-      "text" : "+"+newPoints
-    }).inject(document.body);
+    var pointBox = new Element("div", { "text" : "+"+newPoints }).inject(document.body);
     pointBox.addClass("points");
     pointBox.setStyles({
       "position" : "absolute",
@@ -135,14 +128,8 @@ this.sizeChangeCount--;
   draw : function(){
     this.gameLevel.canvas.beginPath();
     this.gameLevel.canvas.fillStyle = this.color;
-    this.gameLevel.canvas.moveTo(this.xposition,
-    this.yposition);
-    this.gameLevel.canvas.arc(this.xposition,
-    this.yposition,
-    this.radius,
-    0,
-    Math.PI*2,
-    true);
+    this.gameLevel.canvas.moveTo(this.xposition, this.yposition);
+    this.gameLevel.canvas.arc(this.xposition, this.yposition, this.radius, 0, Math.PI*2, true);
     this.gameLevel.canvas.closePath();
     this.gameLevel.canvas.fill();
   }
@@ -156,10 +143,7 @@ var StarterBall = new Class({
     this.gameLevel = gameLevel;
     var coordinates = this.gameLevel.chainrxn.ballField.getCoordinates();
     var dimensions = this.gameLevel.chainrxn.ballField.getSize();
-    this.element = new Element("div",
-    {
-      "id" : "starterBall"
-    }).inject(document.body);
+    this.element = new Element("div", { "id" : "starterBall" }).inject(document.body);
     this.xposition = coordinates.left+dimensions.x/2;
     this.yposition = coordinates.top+dimensions.y/2;
     this.move();
