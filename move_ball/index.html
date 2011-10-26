@@ -81,11 +81,18 @@
                 return this.x + this.size / 2;
             };
             Ball.prototype.drawText = function() {
+                /*
                 jQuery('<div/>', {
                   class: 'points',
                   text: this.id,
                   style: "top: " + this.textTop() + "px; left: " + this.textLeft() + "px;"
                 }).appendTo('body');
+                */
+                ctx.save
+                ctx.font = "16px impact";
+                ctx.fillStyle = '#996600';
+                ctx.textAlign = 'center';
+                ctx.fillText(this.id, this.x + this.size - 3, this.y + this.size - 3);
             };
 
             function randColor() {
