@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Storage sql</title>
+    </head>
+    <script>
+        var db = openDatabase('db', '1.0', 'my first db', 2*1024*1024);
+        function log(id, name) {
+            var row = document.createElement('tr');
+            var idCell = document.createElement('td');
+            var nameCell = document.createElement('td');
+            idCell.textContent = id;
+            nameCell.textContent = name;
+            row.appendChild(idCell);
+            row.appendChild(nameCell);
+
+            document.getElementById('racers').appendChild(row);
+        }
+        function doQuery() {
+            db.transaction(function(tx) {
+                tx.executeSql('SELECT * FROM racers', [], function(tx, result) {
+                    for(var i=0; i < result.rows.length; i++) {
+                        var item = result.rows.item(i);
+                        log(item.id, item.name);
+                    }
+                });
+            });
+        }
+        function initDatabase() {
+            var names = ['Peter Lubbers', 'Brain Albers', 'Frank Salim'];
+            db.transaction(function(tx) {
+                tx.executeSql('CREATE TABLE IF NOT EXISTS racers (id integer primary key autoincrement, name)');
+
+                for(var i=0; i < names.length; i++) {
+                    tx.executeSql('INSERT INTO racers (name) VALUES (?)', [names[i]]);
+                }
+                doQuery();
+            });
+        }
+
+        initDatabase();
+    </script>
+    <body>
+        <h1>Web SQL Database</h1>
+        <table id="racers" border="1" cellspacing="0" style="width:100%">
+            <th>Id</th>
+            <th>Name</th>
+        </table>
+    </body>
+</html>
