@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="utf-8" />
+        <title>Canvas XY</title>
+    </head>
+    <body>
+        <canvas id="c" width="500" height="375"></canvas>
+        <script>
+            var c_canvas = document.getElementById('c');
+            var context = c_canvas.getContext('2d');
+
+            // canvas x y lines
+            context.strokeStyle = "#eee";
+            for(var x=0.5; x < 500; x+=10) {
+                context.moveTo(x, 0);
+                context.lineTo(x, 375);
+            }
+            for(var y=0.5; y < 375; y+=10) {
+                context.moveTo(0, y);
+                context.lineTo(500, y);
+            }
+            context.stroke();
+
+            // canvas x y arrow
+            context.strokeStyle = "#000";
+
+            context.beginPath();
+            context.moveTo(0, 40);
+            context.lineTo(240, 40);
+            context.moveTo(260, 40);
+            context.lineTo(500, 40);
+            context.moveTo(495, 35);
+            context.lineTo(500, 40);
+            context.lineTo(495, 45);
+
+            context.moveTo(60, 0);
+            context.lineTo(60, 153);
+            context.moveTo(60, 173);
+            context.lineTo(60, 375);
+            context.moveTo(65, 370);
+            context.lineTo(60, 375);
+            context.lineTo(55, 370);
+
+            context.stroke();
+
+            // fill text
+            context.font = "bold 12px sans-serif";
+            context.fillText('x', 248, 43);
+            context.fillText('y', 58, 165);
+            context.textBaseline = 'top';
+            context.fillText('(0, 0)', 8, 5);
+            context.textAlign = 'right';
+            context.textBaseline = 'bottom';
+            context.fillText('(500, 375)', 492, 370);
+
+            // add dot
+            context.fillRect(0, 0, 3, 3);
+            context.fillRect(494, 0, 3, 3);
+            context.fillRect(497, 372, 3, 3);
+            context.fillRect(0, 369, 3, 3);
+        </script>
+    </body>
+</html>
