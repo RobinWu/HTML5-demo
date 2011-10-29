@@ -35,27 +35,26 @@ var Interface = function(c,b){
 };
 Object.method("ensureImplements",function(){
   var c = this;
-  if(typeof this =  =  = "function")c = this.prototype;
-  for(var d = 0,g = arguments.length;
-  d<g;
-  d++){
+  if(typeof this === "function")c = this.prototype;
+  for(var d = 0,g = arguments.length; d<g; d++){
     var a = arguments[d];
-    if(a.constructor! =  = Interface)throw new Error("Function Interface.ensureImplements expects argumentstwo and above to be instances of Interface.");
-    for(var e = 0,f = a.methods.length;
-    e<f;
-    e++){
+    if(a.constructor !== Interface)
+      throw new Error("Function Interface.ensureImplements expects argumentstwo and above to be instances of Interface.");
+
+    for(var e = 0,f = a.methods.length; e<f; e++){
       var b = a.methods[e];
-      if(!c[b]||typeof c[b]! =  = "function")throw new Error("function Interface.ensureImplements :  object does not implement the "+a.name+" interface. Method "+b+" was not found.");
-      
+
+      if(!c[b]||typeof c[b]!== "function")
+        throw new Error("function Interface.ensureImplements :  object does not implement the "+a.name+" interface. Method "+b+" was not found.");
     }
   }return true
 });
 Array.isArray = function(a){
-  return a&&typeof a =  =  = "object"&&typeof a.length =  =  = "number"&&typeof a.splice =  =  = "function"&&!a.propertyIsEnumerable("length")
+  return a&&typeof a === "object"&&typeof a.length === "number"&&typeof a.splice === "function"&&!a.propertyIsEnumerable("length")
 };
 Array.method("forEach",function(b,c){
   var d = this.length>>>0;
-  if(typeof b! = "function")throw new TypeError;
+  if(typeof b!= "function")throw new TypeError;
   for(var c = arguments[1],a = 0;
   a<d;
   a++)a in this&&b.call(c,this[a],a,this)
@@ -63,10 +62,10 @@ Array.method("forEach",function(b,c){
 Array.method("indexOf",function(c,a){
   var b = this.length>>>0,a = Number(arguments[1])||0;
   a = a<0 ? Math.ceil(a) : Math.floor(a);
-  if(a<0)a+ = b;
+  if(a<0)a+= b;
   for(;
   a<b;
-  a++)if(a in this&&this[a] =  =  = c)return a;
+  a++)if(a in this&&this[a] === c)return a;
   return-1
 });
 Array.method("draw",function(a){
@@ -80,11 +79,11 @@ Array.method("update",function(){
   })
 });
 Array.method("addNew",function(a){
-  this.indexOf(a) =  = -1&&this.push(a)
+  this.indexOf(a) == -1&&this.push(a)
 });
 Array.method("delEle",function(a){
   var b = this.indexOf(a);
-  this.indexOf(a)! = -1&&this.splice(b,1)
+  this.indexOf(a)!= -1&&this.splice(b,1)
 });
 Array.method("randomEle",function(){
   return this[Math.floor(Math.random()*this.length)]
@@ -97,7 +96,7 @@ Math.randomNum = function(a){
   return Math.floor(Math.random()*a)
 };
 Math.compend = function(a,b){
-  return a> = Math.floor(Math.random()*b)
+  return a>= Math.floor(Math.random()*b)
 };
 var GCanvas = Object.createClass({
   cfn : function(a){
@@ -114,7 +113,7 @@ var GCanvas = Object.createClass({
     },removeLayerByName : function(b){
       for(var a = 0;
       a<this._layers.length;
-      a++)if(this._layers[a].name =  =  = b){
+      a++)if(this._layers[a].name === b){
         this._layers.splice(a,1);
         return true
       }
@@ -126,7 +125,7 @@ var GCanvas = Object.createClass({
     },getLayerByName : function(b){
       for(var a = 0;
       a<this._layers.length;
-      a++)if(this._layers[a].name =  =  = b)return this._layers[a];
+      a++)if(this._layers[a].name === b)return this._layers[a];
       return false
     },setBg : function(a){
       this._canvas.style.background = a
@@ -146,8 +145,8 @@ var GCanvas = Object.createClass({
       var a = this._canvas,c = a.offsetLeft,d = a.offsetTop;
       while(a.offsetParent){
         a = a.offsetParent;
-        c+ = a.offsetLeft;
-        d+ = a.offsetTop
+        c+= a.offsetLeft;
+        d+= a.offsetTop
       }return{
         x : b.clientX-c,y : b.clientY-d
       }
@@ -180,7 +179,7 @@ var GCanvas = Object.createClass({
     },getChildByName : function(b){
       for(var a = 0;
       a<this.objs.length;
-      a++)if(this.objs[a].name =  =  = b)return this.objs[a];
+      a++)if(this.objs[a].name === b)return this.objs[a];
       return false
     },removeAll : function(){
       this.empty()
@@ -255,7 +254,7 @@ var GCanvas = Object.createClass({
     this.animate = b;
     this.width = a;
     this.height = a;
-    if(b.constructor! =  = GAnimate)this.animate = new GAnimate(b);
+    if(b.constructor!== GAnimate)this.animate = new GAnimate(b);
     this._tiles = [];
     for(var c = 0;
     c<this.animate.frames;
@@ -267,7 +266,7 @@ var GCanvas = Object.createClass({
       return this._tiles[this.animate.currentFrame]
     },setTile : function(a){
       var b = a<0 ? 0 : a>this._tiles.length-1 ? this._tiles.length-1 : a;
-      while(this.animate.currentFrame! =  = b)this.play()
+      while(this.animate.currentFrame!== b)this.play()
     },stop : function(){
       this.stoped = true
     },stopAt : function(a){
@@ -297,7 +296,7 @@ var GCanvas = Object.createClass({
     setColor : function(a){
       this._color = a
     },setBorder : function(a,b){
-      if(a =  =  = "none")this.hasBorder = false;
+      if(a === "none")this.hasBorder = false;
       else{
         this._border = a;
         this._bw = b||1
@@ -327,7 +326,7 @@ var GCanvas = Object.createClass({
       a._ctx.restore()
     },atPoint : function(a){
       var b = this.hasBorder ? this.r+this._bw/2 : this.r;
-      return Math.distance(this.x,this.y,a.x,a.y)< = b ? true : false
+      return Math.distance(this.x,this.y,a.x,a.y)<= b ? true : false
     }
   }
 }),GRect = Object.createClass({
@@ -351,7 +350,7 @@ var GCanvas = Object.createClass({
       a._ctx.restore()
     },atPoint : function(a){
       var b = this.hasBorder ? this._bw/2 : 0;
-      return a.x> = this.x-b&&a.x< = this.x+this.width+b&&a.y> = this.y-b&&a.y< = this.y+this.height+b ? true : false
+      return a.x>= this.x-b&&a.x<= this.x+this.width+b&&a.y>= this.y-b&&a.y<= this.y+this.height+b ? true : false
     }
   }
 }),GText = Object.createClass({
@@ -391,7 +390,7 @@ var GCanvas = Object.createClass({
         d[a] = [];
         for(var b = 0;
         b<c[a].length;
-        b++)if(c[a][b]&&c[a][b]! =  = spaceTile)d[a][b] = new GSpriteTile(e,b*this.tw,a*this.tw,c[a][b])
+        b++)if(c[a][b]&&c[a][b]!== spaceTile)d[a][b] = new GSpriteTile(e,b*this.tw,a*this.tw,c[a][b])
       }return d
     }
   }
@@ -460,7 +459,7 @@ var GCanvas = Object.createClass({
 },gc,BulletsFactory = {
   mb : MBullets,eb : EBullets,add : function(b){
     var a = new Bullet(b,tiles.bullets);
-    if(b.type =  = TType.PLAYER)this.mb.push(a);
+    if(b.type == TType.PLAYER)this.mb.push(a);
     else{
       a.state = 2;
       this.eb.push(a)
@@ -496,7 +495,7 @@ var GCanvas = Object.createClass({
         this.shootPass = 0
       }
     },update : function(){
-      if(Tdir[this.dir]! =  = "dir"){
+      if(Tdir[this.dir]!== "dir"){
         this.setState(Tdir[this.dir]);
         this.invincibleTime--;
         this.invincibleTime<0&&this.beBorn()
@@ -514,13 +513,13 @@ var GCanvas = Object.createClass({
       this.state = a
     },move : function(a){
       switch(this.dir){
-        case Direction.UP : this.y- = this.speed;
+        case Direction.UP : this.y-= this.speed;
         break;
-        case Direction.DOWN : this.y+ = this.speed;
+        case Direction.DOWN : this.y+= this.speed;
         break;
-        case Direction.LEFT : this.x- = this.speed;
+        case Direction.LEFT : this.x-= this.speed;
         break;
-        case Direction.RIGHT : this.x+ = this.speed
+        case Direction.RIGHT : this.x+= this.speed
       }enableSound&&a&&a.play()
     },setPos : function(a){
       this.x = a.x;
@@ -543,7 +542,7 @@ var GCanvas = Object.createClass({
     this.sliding = 0
   },parent : Tank,numbers : {
     update : function(){
-      if(Tdir[this.dir]! =  = "dir"){
+      if(Tdir[this.dir]!== "dir"){
         this.setState(Tdir[this.dir]);
         this.invincibleTime--;
         this.invincibleTime<0&&this.beBorn()
@@ -586,7 +585,7 @@ var GCanvas = Object.createClass({
         this.ishoot = false
       }
     },think : function(){
-      if(this.thinkTime> = DelayTime.ethinkTime){
+      if(this.thinkTime>= DelayTime.ethinkTime){
         this.setState(cdifficulty.state.randomEle());
         this.ishoot = Math.compend(1,cdifficulty.shoot);
         this.thinkTime = 0
@@ -630,13 +629,13 @@ var GCanvas = Object.createClass({
     }
   },parent : GSpriteTile,numbers : {
     moveUp : function(){
-      this.y- = this.speed
+      this.y-= this.speed
     },moveDown : function(){
-      this.y+ = this.speed
+      this.y+= this.speed
     },moveLeft : function(){
-      this.x- = this.speed
+      this.x-= this.speed
     },moveRight : function(){
-      this.x+ = this.speed
+      this.x+= this.speed
     }
   }
 }),BombEffect = Object.createClass({
@@ -676,13 +675,13 @@ var GCanvas = Object.createClass({
 }),HorizontalCheckSingle = [,,"top","top","top","bottom","bottom","bottom",],HorizontalCheckDouble = ["up","up",,,,,,,"down","down"],HorizontalBulletTopLeftImpactTiles = [,"clear","clear",,,"clear","clear",,1,5,"iron","base","base","base","base",,,,,,,,,,,,,,,,],HorizontalBulletBottomLeftImpactTiles = [,,,"clear","clear","clear","clear",3,,5,"iron","base","base","base","base",,,,,,,,,,,,,,,,],HorizontalBulletTopRightImpactTiles = [,"clear","clear",,,"clear","clear",,2,6,"iron","base","base","base","base",,,,,,,,,,,,,,,,],HorizontalBulletBottomRightImpactTiles = [,,,"clear","clear","clear","clear",4,,6,"iron","base","base","base","base",,,,,,,,,,,,,,,,],HorizontalBulletLeftTopImpactTiles = [,"clear",,"clear",,3,,"clear","clear",7,"iron","base","base","base","base",,,,,,,,,,,,,,,,],HorizontalBulletRightTopImpactTiles = [,,"clear",,"clear",,4,"clear","clear",7,"iron","base","base","base","base",,,,,,,,,,,,,,,,],HorizontalBulletLeftBottomImpactTiles = [,"clear",,"clear",,1,,"clear","clear",8,"iron","base","base","base","base",,,,,,,,,,,,,,,,],HorizontalBulletRightBottomImpactTiles = [,,"clear",,"clear",,2,"clear","clear",8,"iron","base","base","base","base",,,,,,,,,,,,,,,,],BulletImpact = {
   impactCheck : function(c,e,d,f,b,a){
     if(c){
-      if(c =  =  = "base")baseDestroy(e,d);
-      else if(c =  =  = "iron"){
-        if(f.level =  =  = 3){
+      if(c === "base")baseDestroy(e,d);
+      else if(c === "iron"){
+        if(f.level === 3){
           e[b][a] = spaceTile;
           d[b][a] = null
         }
-      }else if(c =  =  = "clear"){
+      }else if(c === "clear"){
         e[b][a] = spaceTile;
         d[b][a] = null
       }else e[b][a] = d[b][a].state = c;
@@ -695,11 +694,11 @@ var GCanvas = Object.createClass({
     };
     var p = o+m/2,g = Math.floor(p/k),l = p % k,d = Math.floor((n-i)/k),e = g,h,b;
     if(HorizontalCheckSingle[l]){
-      if(HorizontalCheckSingle[l] =  =  = "top")b = HorizontalBulletTopLeftImpactTiles[c[e][d]];
+      if(HorizontalCheckSingle[l] === "top")b = HorizontalBulletTopLeftImpactTiles[c[e][d]];
       else b = HorizontalBulletBottomLeftImpactTiles[c[e][d]];
       f = BulletImpact.impactCheck(b,c,j,a,e,d)
     }else{
-      if(HorizontalCheckDouble[l] =  = "up"){
+      if(HorizontalCheckDouble[l] == "up"){
         e = g-1;
         h = g
       }else h = g+1;
@@ -717,11 +716,11 @@ var GCanvas = Object.createClass({
     };
     var p = o+l/2,f = Math.floor(p/j),k = p % j,c = Math.floor((n+m+h-1)/j),d = f,g;
     if(HorizontalCheckSingle[k]){
-      if(HorizontalCheckSingle[k] =  =  = "top")impactTile = HorizontalBulletTopRightImpactTiles[b[d][c]];
+      if(HorizontalCheckSingle[k] === "top")impactTile = HorizontalBulletTopRightImpactTiles[b[d][c]];
       else impactTile = HorizontalBulletBottomRightImpactTiles[b[d][c]];
       e = BulletImpact.impactCheck(impactTile,b,i,a,d,c)
     }else{
-      if(HorizontalCheckDouble[k] =  = "up"){
+      if(HorizontalCheckDouble[k] == "up"){
         d = f-1;
         g = f
       }else g = f+1;
@@ -739,11 +738,11 @@ var GCanvas = Object.createClass({
     };
     var q = o+n/2,g = Math.floor(q/k),l = q % k,d = Math.floor((p+m+i-1)/k),e = g,h,b;
     if(HorizontalCheckSingle[l]){
-      if(HorizontalCheckSingle[l] =  =  = "top")b = HorizontalBulletLeftTopImpactTiles[c[d][e]];
+      if(HorizontalCheckSingle[l] === "top")b = HorizontalBulletLeftTopImpactTiles[c[d][e]];
       else b = HorizontalBulletRightTopImpactTiles[c[d][e]];
       f = BulletImpact.impactCheck(b,c,j,a,d,e)
     }else{
-      if(HorizontalCheckDouble[l] =  = "up"){
+      if(HorizontalCheckDouble[l] == "up"){
         e = g-1;
         h = g
       }else h = g+1;
@@ -761,11 +760,11 @@ var GCanvas = Object.createClass({
     };
     var p = n+m/2,g = Math.floor(p/k),l = p % k,d = Math.floor((o-i)/k),e = g,h,b;
     if(HorizontalCheckSingle[l]){
-      if(HorizontalCheckSingle[l] =  =  = "top")b = HorizontalBulletLeftBottomImpactTiles[c[d][e]];
+      if(HorizontalCheckSingle[l] === "top")b = HorizontalBulletLeftBottomImpactTiles[c[d][e]];
       else b = HorizontalBulletRightBottomImpactTiles[c[d][e]];
       f = BulletImpact.impactCheck(b,c,j,a,d,e)
     }else{
-      if(HorizontalCheckDouble[l] =  = "up"){
+      if(HorizontalCheckDouble[l] == "up"){
         e = g-1;
         h = g
       }else h = g+1;
@@ -782,7 +781,7 @@ var GCanvas = Object.createClass({
     var l = a.x,d = a.y,p = a.width,k = a.height,h = a.speed;
     if(l-h<0)return true;
     for(var j = Math.floor((l-h)/c),o = Math.floor(d/c),n = Math.floor((d+k-1)/c),e = 0,f,g,b = o;
-    b< = n;
+    b<= n;
     b++)if(i[b][j]<canpassTile){
       f = c*(b+1)-d;
       g = c*b-d-k;
@@ -796,7 +795,7 @@ var GCanvas = Object.createClass({
     var m = a.x,d = a.y,l = a.width,k = a.height,h = a.speed;
     if(m+l+h>260)return true;
     for(var j = Math.floor((m+l+h-1)/c),p = Math.floor(d/c),o = Math.floor((d+k-1)/c),e = 0,f,g,b = p;
-    b< = o;
+    b<= o;
     b++)if(i[b][j]<canpassTile){
       f = c*(b+1)-d;
       g = c*b-d-k;
@@ -810,7 +809,7 @@ var GCanvas = Object.createClass({
     var d = a.x,m = a.y,l = a.width,k = a.height,h = a.speed;
     if(m+k+h>260)return true;
     for(var p = Math.floor((m+k+h-1)/c),j = Math.floor(d/c),o = Math.floor((d+l-1)/c),e = 0,f,g,b = j;
-    b< = o;
+    b<= o;
     b++)if(i[p][b]<canpassTile){
       f = c*(b+1)-d;
       g = c*b-d-l;
@@ -824,7 +823,7 @@ var GCanvas = Object.createClass({
     var d = a.x,l = a.y,k = a.width,p = a.height,h = a.speed;
     if(l-h<0)return true;
     for(var o = Math.floor((l-h)/c),j = Math.floor(d/c),n = Math.floor((d+k-1)/c),e = 0,f,g,b = j;
-    b< = n;
+    b<= n;
     b++)if(i[o][b]<canpassTile){
       f = c*(b+1)-d;
       g = c*b-d-k;
@@ -859,7 +858,7 @@ function initConfig(){
     initAllSounds(a);
     f()
   }function a(a){
-    b+ = a.lsize;
+    b+= a.lsize;
     updateLoadingbar(gc,e,b)
   }
 }function updateLoadingbar(e,d,c){
@@ -987,7 +986,7 @@ function initConfig(){
     break;
     case 74 : case 75 : case 32 : keyState.shoot = true;
     break;
-    case 13 : if(gstate =  =  = 50)keyState.start = true
+    case 13 : if(gstate === 50)keyState.start = true
   }
 }function cancelKey(a){
   switch(a.keyCode){
@@ -1001,7 +1000,7 @@ function initConfig(){
     break;
     case 74 : case 75 : case 32 : keyState.shoot = false;
     break;
-    case 13 : if(gstate =  =  = 50)keyState.start = false;
+    case 13 : if(gstate === 50)keyState.start = false;
     else pauseGame();
     break;
     case 77 : switchSound()
@@ -1012,7 +1011,7 @@ function initConfig(){
   a++){
     b = 0;
     while(arguments[a][b]){
-      c+ = arguments[a][b].size;
+      c+= arguments[a][b].size;
       b++
     }
   }return c
@@ -1250,12 +1249,12 @@ function initConfig(){
   tlayers.toptiles.empty();
   MBullets.length = 0;
   EBullets.length = 0;
-  if(level =  =  = 10)DelayTime.etankDelay = fps*2;
-  if(level =  =  = 20)DelayTime.etankDelay = fps*1;
-  if(level =  =  = 20)cdifficulty = difficulties[1];
-  if(level =  =  = 20)maxEtanks = 5;
-  if(level =  =  = 30)DelayTime.etankDelay = fps*0.5;
-  if(level =  =  = 30)maxEtanks = 6;
+  if(level === 10)DelayTime.etankDelay = fps*2;
+  if(level === 20)DelayTime.etankDelay = fps*1;
+  if(level === 20)cdifficulty = difficulties[1];
+  if(level === 20)maxEtanks = 5;
+  if(level === 30)DelayTime.etankDelay = fps*0.5;
+  if(level === 30)maxEtanks = 6;
   var a = createTileMap(allMap[level-1],tiles.maze,tileImgMap);
   cmap = a.map;
   wTilesMap = a.wTilesMap;
@@ -1401,7 +1400,7 @@ function initConfig(){
         }stageEt[a].life--;
         enableSound&&sounds.eleveldown.play();
         if(stageEt[a].life<1){
-          highScore+ = stageEt[a].cost;
+          highScore+= stageEt[a].cost;
           destoryEtank(a)
         }else stageEt[a].tiles = tiles["ect"+stageEt[a].life];
         break
@@ -1501,7 +1500,7 @@ function initConfig(){
   etankStopDelay--;
   stageEt.forEach(function(a){
     a.update();
-    if(Tdir[a.dir] =  =  = "dir"&&!a.stoped)if(etankStopDelay<0){
+    if(Tdir[a.dir] === "dir"&&!a.stoped)if(etankStopDelay<0){
       a.think();
       a.ishoot&&a.shoot();
       if(a.canMove)switch(a.dir){
@@ -1554,7 +1553,7 @@ function initConfig(){
     case itemTypes.invincible : mtank.invincibled();
     break;
     case itemTypes.lifeup : addPlayerLife()
-  }highScore+ = 500;
+  }highScore+= 500;
   enableSound&&sounds.getItem.play()
 }function stopAllEtanks(){
   etankStopDelay = DelayTime.stopedDelay
@@ -1564,9 +1563,9 @@ function initConfig(){
   mt++;
   enableSound&&sounds.up.play()
 }function checkWin(){
-  return et =  =  = 0
+  return et === 0
 }function checkLost(){
-  if(mt =  =  = 0||cmap[24][12] =  =  = 15)return true
+  if(mt === 0||cmap[24][12] === 15)return true
 }function buildBaseIron(b,a){
   baseDelay = DelayTime.baseDelay;
   baseIron = true;
@@ -1633,7 +1632,7 @@ function initConfig(){
   createBombEffect(130,250,sounds.die);
   gameover = true
 }function pauseGame(){
-  if(gstate =  =  = 400||gstate =  =  = 500||gstate =  =  = 800)if(gamePause){
+  if(gstate === 400||gstate === 500||gstate === 800)if(gamePause){
     gamePause = false;
     removePauseGameText()
   }else{
@@ -1651,7 +1650,7 @@ function initConfig(){
     var a = document.createElement("script");
     a.type = "text/javascript";
     if(a.readyState)a.onreadystatechange = function(){
-      if(a.readyState =  = "loaded"||a.readyState =  = "complete"){
+      if(a.readyState == "loaded"||a.readyState == "complete"){
         a.onreadystatechange = null;
         b()
       }
@@ -1673,7 +1672,7 @@ function initConfig(){
       
     };
     function h(){
-      a.length =  = f&&g(e)
+      a.length == f&&g(e)
     }for(var b = 0;
     b<a.length;
     b++){
@@ -1692,7 +1691,7 @@ function initConfig(){
     a.src = e;
     var c;
     function d(){
-      if(a.readyState =  = 4){
+      if(a.readyState == 4){
         window.clearInterval(c);
         b&&b(a)
       }
