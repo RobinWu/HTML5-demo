@@ -1,0 +1,43 @@
+======================================
+Dragon was created with QBASIC in May 
+       1996 by Matthew Hackett.       
+======================================
+                                      
+I live in the little shitty town of   
+Carterville Illinois and have only one
+other friend who programs: Jim        
+MacDonald - who is the coolest        
+programmer on Earth. I don't care what
+you say.                              
+-                                    -
+The setup for this is really bad I    
+know... but shut up this is just me by
+myself making a bunch of crap. I have 
+been trying to program with Turbo C++ 
+for quite some time, but it's too     
+damned technical and the only way to  
+get Mode 13h with 3.0 is to write to  
+the Video Buffer - which is a bitch!  
+-                                    -
+The thing is I've been programming    
+with QB for about a year and I hadn't 
+had a compiler...that's one reason C++
+attracted me.  Bad thing about QB is  
+it can only have 64K worth of arrays, 
+which means I had to take out all of  
+the .VOC files I had in store for it. 
+It WAS really cool, but at least I    
+was able to include some regular SB   
+sound instead of crappy PC sound.     
+-                                    -
+Anyway anyone who wants to contact    
+somebody making QB games, you can do  
+so at http\\*********.                
+-                                    -
+Oh yes!  If somebody wants to tell me 
+how to play MIDI tunes in QB or C     
+PLEASE contact me!!                   
+-                                    -
+The Egotystical Matt Hackett 1996     
+                                      
+ 739 

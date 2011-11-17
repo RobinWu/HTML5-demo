@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf=8">
+		<title>QBASIC.JS</title>
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<script src="QBASIC.JS"></script>
+		<script>
+			var color = 1
+			var x = 1
+			var y = 1
+			var size = 25
+			var speed = 2
+
+			for (var i = 1; i <= 255; i++) {
+				PALETTE(i, 0, 255 - Rand(0, 255), 255 - i)
+			}
+
+			SCREEN(13)
+			DrawScreen()
+
+			COLOR(1)
+			LOCATE(5, 5)
+			PRINT("HELLO WORLD")
+			PRINT("MOVE AROUND WITH THE ARROW KEYS")
+			PRINT("PRESS ESC TO CLEAR SCREEN")
+			PRINT("")
+			COLOR(14)
+			PRINT("VIEW SOURCE! IT LOOKS LIKE QBASIC")
+
+			INKEY$(function (key) {
+				if (color++ > 255) color = 1;
+				switch (key) {
+					case CHR$(27):
+						CLS()
+						DrawScreen(); break
+					case CHR$(38):
+						y -= speed
+						DrawScreen(); break
+					case CHR$(40):
+						y += speed
+						DrawScreen(); break
+					case CHR$(37):
+						x -= speed
+						DrawScreen(); break
+					case CHR$(39):
+						x += speed
+						DrawScreen(); break
+				}
+			})
+
+			function DrawScreen () {
+				LINE(x, y, x + 20, y + 20, color, BF)
+				PSET(x + size / 2, y + size / 2, color - 1)
+			}
+			function Rand (n1, n2) {
+				return INT(RND() * (n2 - (n1 - 1))) + n1
+			}
+		</script>
+	</body>
+</html>
